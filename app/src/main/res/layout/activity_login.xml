@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/colorPrimary"
+    android:layout_height="match_parent"
+    tools:context=".UsersAuth.Activity.LoginActivity"
+    android:layoutDirection="rtl">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:padding="16dp">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="150dp"
+            android:id="@+id/img"
+            android:layout_height="150dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/initimage"/>
+
+
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:ellipsize="start"
+            android:layout_marginTop="15dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textSize="15dp"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:layout_below="@id/img"
+            android:background="@drawable/shapeb"
+            android:textColorHint="#000000"
+            android:text=""
+            android:layout_marginBottom="10dp"
+            android:hint="اسم المستخدم"
+            android:backgroundTint="#ffffff"
+            android:drawableTint="#ffffff"
+            android:drawablePadding="10dp"
+            android:paddingRight="5dp"/>
+
+
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:ellipsize="start"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textSize="15dp"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:layout_below="@id/username"
+            android:background="@drawable/shapeb"
+            android:textColorHint="#000000"
+            android:text=""
+            android:layout_marginBottom="10dp"
+            android:hint="كلمة السر"
+            android:backgroundTint="#ffffff"
+            android:drawableTint="#ffffff"
+            android:drawablePadding="10dp"
+            android:paddingRight="5dp"/>
+
+        <!-- Login Button -->
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:background="@drawable/shape2"
+            android:text="تسجيل الدخول"
+            android:layout_below="@id/password"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:textColor="#ffff" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="15dp"
+            android:weightSum="2"
+            android:layout_below="@id/btn_login"
+            android:layout_height="70dp"
+            android:layout_centerHorizontal="true">
+
+            <Button
+                android:id="@+id/btn_signup"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="55dp"
+                android:text="انشاء حساب"
+                android:textAllCaps="false"
+                android:layout_marginRight="7dp"
+                android:textStyle="bold"
+                android:background="@drawable/shape2"
+                android:textColor="#ffffff"
+                android:layout_gravity="center"
+                android:textSize="14dp"
+                android:layout_marginLeft="5dp"/>
+
+            <Button
+                android:id="@+id/btn_reset_password"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="7dp"
+                android:layout_height="55dp"
+                android:padding="15dp"
+                android:text="نسيت كلمة السر"
+                android:layout_gravity="center"
+                android:background="@drawable/shape2"
+                android:textAllCaps="false"
+                android:textSize="14dp"
+                android:textColor="#ffffff"
+                android:textStyle="bold"/>
+
+            <!-- Link to Login Screen -->
+
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

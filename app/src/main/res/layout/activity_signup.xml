@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/colorPrimary"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".UsersAuth.Activity.SignupActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="16dp"
+            android:id="@+id/lay">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/initimage"
+                android:id="@+id/img" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/img"
+                android:id="@+id/logo_text"
+                android:text="صنعتي"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_marginBottom="30dp"
+                android:textSize="28dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/namef"
+                android:background="@drawable/shape"
+                android:textColorHint="#ffffff"
+                android:layout_below="@id/logo_text">
+
+                <EditText
+                    android:id="@+id/nameField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="أسم المستخدم"
+                    android:textColorHint="#ffffff"
+                    android:textSize="24dp"
+                    android:padding="5dp"
+                    android:drawableTint="#ffffff"
+                    android:drawablePadding="5dp"
+                    android:backgroundTint="#ffffff"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="#ffffff" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:id="@+id/emailf"
+                android:background="@drawable/shape"
+                android:textColorHint="#ffffff"
+                android:layout_below="@id/namef">
+
+                <EditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="الايميل"
+                    android:textColorHint="#ffffff"
+                    android:textSize="24dp"
+                    android:padding="5dp"
+                    android:drawableTint="#ffffff"
+                    android:drawablePadding="5dp"
+                    android:backgroundTint="#ffffff"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@android:color/white" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:id="@+id/adressf"
+                android:background="@drawable/shape"
+                android:textColorHint="#ffffff"
+                android:layout_below="@id/emailf">
+
+                <EditText
+                    android:id="@+id/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="العنوان"
+                    android:textColorHint="#ffffff"
+                    android:textSize="24dp"
+                    android:padding="5dp"
+                    android:drawableTint="#ffffff"
+                    android:drawablePadding="5dp"
+                    android:backgroundTint="#ffffff"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@android:color/white" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/phonef"
+                android:textColorHint="#ffffff"
+                android:layout_below="@+id/adressf"
+                android:background="@drawable/shape"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/phoneField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="رقم الهاتف"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:textColorHint="#ffffff"
+                    android:textSize="24dp"
+                    android:padding="5dp"
+                    android:drawableTint="#ffffff"
+                    android:drawablePadding="5dp"
+                    android:backgroundTint="#ffffff"
+                    android:singleLine="true"
+                    android:textColor="@android:color/white" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="5dp"
+                android:id="@+id/type_spinner_lay"
+                android:background="@drawable/shape"
+                android:layout_below="@id/phonef">
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textDirection="rtl"
+                    android:id="@+id/type_spinner"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="5dp"
+                android:id="@+id/job_spinner_lay"
+                android:background="@drawable/shape"
+                android:layout_below="@id/type_spinner_lay"
+                android:visibility="gone">
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textDirection="rtl"
+                    android:id="@+id/job_spinner"/>
+            </RelativeLayout>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
+                android:layout_below="@+id/job_spinner_lay"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:id="@+id/profileimage"
+                android:src="@drawable/ic_baseline_image_24" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/passf"
+                android:textColorHint="#ffffff"
+                android:layout_below="@id/profileimage"
+                android:background="@drawable/shape"
+                android:layout_marginTop="5dp">
+
+                <EditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusableInTouchMode="true"
+                    android:hint="كلمة السر"
+                    android:textColorHint="#ffffff"
+                    android:textSize="24dp"
+                    android:padding="5dp"
+                    android:drawableTint="#ffffff"
+                    android:drawablePadding="5dp"
+                    android:backgroundTint="#ffffff"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="#797578" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <Button
+                android:id="@+id/sign_up_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/shape2"
+                android:text="إنشاء حساب"
+                android:textSize="24dp"
+                android:textColor="#ffff"
+                android:textStyle="bold"
+                android:layout_below="@id/passf"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="15dp"
+                android:weightSum="2"
+                android:layout_below="@id/sign_up_button"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/sign_in_button"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape2"
+                    android:text="تسجيل الدخول"
+                    android:textAllCaps="false"
+                    android:textSize="16dp"
+                    android:textColor="#ffffff"
+                    android:layout_marginRight="7dp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"/>
+
+                <Button
+                    android:id="@+id/btn_reset_password"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:textSize="16dp"
+                    android:layout_marginLeft="7dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape2"
+                    android:textStyle="bold"
+                    android:text="نسيت كلمة السر؟"
+                    android:textAllCaps="false"
+                    android:textColor="#ffffff"
+                    android:layout_below="@id/sign_up_button"/>
+
+            </LinearLayout>
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>

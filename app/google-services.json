@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1038536184094",
+    "project_id": "sanaati-17a1b",
+    "storage_bucket": "sanaati-17a1b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1038536184094:android:7ffffd9fab3c893941390f",
+        "android_client_info": {
+          "package_name": "com.example.sanaati"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1038536184094-agdetomm6uiiff5gsvbufvd2dhtr0ss6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sanaati",
+            "certificate_hash": "a274f8ca1bc1900279cd01c9d20fd8d2febc9b0c"
+          }
+        },
+        {
+          "client_id": "1038536184094-7kjiumqt2geooqrm1cqe78452p119ksi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDm5rDcRmnc5TKAhcWli0f1A9KGqQGaJBk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1038536184094-7kjiumqt2geooqrm1cqe78452p119ksi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
