@@ -49,8 +49,6 @@ public class MainActivity extends AppCompatActivity {
             editor.putString("new_token", "no");
             editor.apply();
 
-
-
             FirebaseFirestore db = FirebaseFirestore.getInstance();
 
             if((getSharedPreferences("Info",MODE_PRIVATE).getString("type","").equals("موظف"))){
