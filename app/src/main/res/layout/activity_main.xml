@@ -54,6 +54,7 @@
         android:id="@+id/servicesLay">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/serviceCard"
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:background="@color/white"
@@ -74,6 +75,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/LocationsCard"
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:background="@color/white"
@@ -207,6 +209,7 @@
         android:layout_marginTop="8dp">
 
         <RelativeLayout
+            android:id="@+id/profileRel"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">
@@ -249,6 +252,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/homeRel"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1">
@@ -279,6 +283,7 @@
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
         android:layout_marginTop="-10dp"
         android:layout_width="200dp"
         android:layout_height="200dp"

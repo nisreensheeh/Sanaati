@@ -2,12 +2,17 @@ package com.example.sanaati;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
 
@@ -16,10 +21,23 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
+    CardView serviceCard, LocationsCard;
+    RelativeLayout homeRel, profileRel;
+    FloatingActionButton fab;
+    EditText search_et;
+    Button search_btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        serviceCard = findViewById(R.id.serviceCard);
+        LocationsCard = findViewById(R.id.LocationsCard);
+        homeRel = findViewById(R.id.homeRel);
+        profileRel = findViewById(R.id.profileRel);
+        fab = findViewById(R.id.fab);
+        search_et = findViewById(R.id.search_et);
+        search_btn = findViewById(R.id.search_btn);
 
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {
