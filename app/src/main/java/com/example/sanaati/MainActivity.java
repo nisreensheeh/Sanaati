@@ -27,12 +27,13 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<String> task) {
                         if (task.isSuccessful()) {
                             String token = task.getResult();
-                            if(!getSharedPreferences("Info",MODE_PRIVATE).getString("token", "-").equals("token")){
+//                            if(!getSharedPreferences("Info",MODE_PRIVATE).getString("token", "-").equals(token)){
                                 SharedPreferences.Editor editor = getSharedPreferences("Info",MODE_PRIVATE).edit();
                                 editor.putString("token", token);
                                 editor.putString("new_token", "yes");
                                 editor.apply();
-                                UploadToken(); }
+                                UploadToken();
+//                            }
                         }
                     }
                 });

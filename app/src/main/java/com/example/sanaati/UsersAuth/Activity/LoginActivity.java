@@ -149,6 +149,7 @@ public class LoginActivity extends AppCompatActivity {
                                                         getSharedPreferences("Info", Context.MODE_PRIVATE).edit();
                                                 editor.putString("name",username);
                                                 editor.putString("userid",users.get(0).userid);
+                                                editor.putString("type",users.get(0).type);
                                                 editor.putString("location",users.get(0).location);
                                                 editor.apply();
 //                                                GPSTracker gpsTracker = new GPSTracker(LoginActivity.this);
