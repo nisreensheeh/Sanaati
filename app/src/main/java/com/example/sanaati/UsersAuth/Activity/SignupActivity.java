@@ -253,20 +253,21 @@ public class SignupActivity extends AppCompatActivity {
                                                 user.put("comission", "0.0");
 
                                                 SharedPreferences.Editor editor = getSharedPreferences("Info",MODE_PRIVATE).edit();
-                                                editor.putString("userid",timeMilli+username );
+                                                editor.putString("userid",timeMilli+username);
                                                 editor.putString("name", username);
                                                 editor.putString("email", email);
-                                                editor.putString("addressd",address );
+                                                editor.putString("addressd",address);
                                                 editor.putString("phone", userphone);
-                                                editor.putString("job",job );
-                                                editor.putString("password",password );
+                                                editor.putString("job",job);
+                                                editor.putString("password",password);
                                                 editor.putString("location", "0.0,0.0");
-                                                editor.putString("type","موظف" );
+                                                editor.putString("type","موظف");
                                                 editor.putString("rate", "5");
                                                 editor.putString("token", getSharedPreferences("Info",MODE_PRIVATE).getString("token",""));
                                                 editor.putString("image",uri.toString());
                                                 editor.putString("aid", android_id);
                                                 editor.putString("comission", "0.0");
+                                                editor.apply();
 
                                                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                                                 db.collection("Users").document("type").collection("Employees").document(user.get("userid").toString())
@@ -296,26 +297,6 @@ public class SignupActivity extends AppCompatActivity {
                             }
 
                         }else if(type.equals("طالب خدمة")){
-//                        Customers customers = new Customers(username, email, address, userphone, password);
-//                            Users employees = new Users(timeMilli+username,username,email,address,userphone,job,password,"x,y",
-//                                    "زبون", "", "", ""
-//                                    , "", "");
-//
-//                            usersRef.document("type").collection("Customers")
-//                                    .add(employees)
-//                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                                        @Override
-//                                        public void onSuccess(DocumentReference documentReference) {
-//                                            Toast.makeText(SignupActivity.this, "تم التسجيل بنجاح", Toast.LENGTH_SHORT).show();
-//                                            startActivity(new Intent(SignupActivity.this, MainActivity.class));
-//                                        }
-//                                    })
-//                                    .addOnFailureListener(new OnFailureListener() {
-//                                        @Override
-//                                        public void onFailure(@NonNull Exception e) {
-//                                            Toast.makeText(SignupActivity.this, "لقد حدث خطأ...حاول مرة اخرى", Toast.LENGTH_SHORT).show();
-//                                        }
-//                                    });
 
                             FirebaseStorage storage =  FirebaseStorage.getInstance();;
                             final StorageReference ImageName =  storage.getReference().child("image"+ImageData.getLastPathSegment());
@@ -361,6 +342,7 @@ public class SignupActivity extends AppCompatActivity {
                                             editor.putString("image",uri.toString());
                                             editor.putString("aid", android_id);
                                             editor.putString("comission", "0.0");
+                                            editor.apply();
 
                                             FirebaseFirestore db = FirebaseFirestore.getInstance();
                                             db.collection("Users").document("type").collection("Customers").document(user.get("userid").toString())
