@@ -55,14 +55,14 @@ public class LoginActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
 
-        if (!getSharedPreferences("Info", Context.MODE_PRIVATE).getString("UserId","").equals("")) {
+        if (!getSharedPreferences("Info", Context.MODE_PRIVATE).getString("userid","").equals("")) {
 //            GPSTracker gpsTracker = new GPSTracker(LoginActivity.this);
 //            location = gpsTracker.getLocation();
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish(); }
 
         db = FirebaseFirestore.getInstance();
-        name = (EditText) findViewById(R.id.email);
+        name = (EditText) findViewById(R.id.username);
         inputPassword = (EditText) findViewById(R.id.password);
         btnSignup = (Button) findViewById(R.id.btn_signup);
         btnLogin = (Button) findViewById(R.id.btn_login);
@@ -113,7 +113,7 @@ public class LoginActivity extends AppCompatActivity {
                         }else{
                             if (gr.size() != 0) {
                                 for (int i = 0; i < gr.size(); i++) {
-                                    users.add(new Users(gr.get(i).getString("userId"), gr.get(i).getString("name"), gr.get(i).getString("email"),
+                                    users.add(new Users(gr.get(i).getString("userid"), gr.get(i).getString("name"), gr.get(i).getString("email"),
                                             gr.get(i).getString("addressd"), gr.get(i).getString("phone"), gr.get(i).getString("job"),
                                             gr.get(i).getString("password"), gr.get(i).getString("location"), gr.get(i).getString("type")
                                             , gr.get(i).getString("rate"), gr.get(i).getString("token"), gr.get(i).getString("image")
@@ -133,7 +133,7 @@ public class LoginActivity extends AppCompatActivity {
                                     }else{
                                         if (gr.size() != 0) {
                                             for (int i = 0; i < gr.size(); i++) {
-                                                users.add(new Users(gr.get(i).getString("userId"), gr.get(i).getString("name"), gr.get(i).getString("email"),
+                                                users.add(new Users(gr.get(i).getString("userid"), gr.get(i).getString("name"), gr.get(i).getString("email"),
                                                         gr.get(i).getString("addressd"), gr.get(i).getString("phone"), gr.get(i).getString("job"),
                                                         gr.get(i).getString("password"), gr.get(i).getString("location"), gr.get(i).getString("type")
                                                         , gr.get(i).getString("rate"), gr.get(i).getString("token"), gr.get(i).getString("image")
@@ -143,13 +143,13 @@ public class LoginActivity extends AppCompatActivity {
 
                                         if(users.size()>0){
 
-                                            if(users.get(0).getName().equals(username) && users.get(0).getPassword().equals(password)) {
+                                            if(users.get(0).name.equals(username) && users.get(0).password.equals(password)) {
                                                 pb.dismiss();
                                                 SharedPreferences.Editor editor =
                                                         getSharedPreferences("Info", Context.MODE_PRIVATE).edit();
-                                                editor.putString("Name",username);
-                                                editor.putString("UserId",users.get(0).getUserId());
-                                                editor.putString("UserLocation",users.get(0).getLocation());
+                                                editor.putString("name",username);
+                                                editor.putString("userid",users.get(0).userid);
+                                                editor.putString("location",users.get(0).location);
                                                 editor.apply();
 //                                                GPSTracker gpsTracker = new GPSTracker(LoginActivity.this);
 //                                                location = gpsTracker.getLocation();
@@ -174,11 +174,11 @@ public class LoginActivity extends AppCompatActivity {
                                                 finish();
                                             }else{
                                                 pb.dismiss();
-                                                Toast.makeText(LoginActivity.this, "المستخدم غير موجود", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(LoginActivity.this, "المستخدم غير موجود1", Toast.LENGTH_SHORT).show();
                                             }
                                         }else{
                                             pb.dismiss();
-                                            Toast.makeText(LoginActivity.this, "المستخدم غير موجود", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(LoginActivity.this, "المستخدم غير موجو2د", Toast.LENGTH_SHORT).show();
                                         }
 
                                     }
