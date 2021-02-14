@@ -22,7 +22,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity {
 
-    CardView serviceCard, LocationsCard, topRatedLay, secondCard;
+
     RelativeLayout homeRel, profileRel;
     FloatingActionButton fab;
     FrameLayout frameLayout;
@@ -32,10 +32,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        serviceCard = findViewById(R.id.serviceCard);
-        LocationsCard = findViewById(R.id.LocationsCard);
-        topRatedLay = findViewById(R.id.topRatedLay);
-        secondCard = findViewById(R.id.secondCard);
         homeRel = findViewById(R.id.homeRel);
         profileRel = findViewById(R.id.profileRel);
         fab = findViewById(R.id.fab);
