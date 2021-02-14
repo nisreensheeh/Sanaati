@@ -13,7 +13,7 @@ import android.os.Build;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
-import com.example.sanaati.MainActivity;
+import com.example.sanaati.Customers.Activity.MainActivity;
 import com.example.sanaati.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;

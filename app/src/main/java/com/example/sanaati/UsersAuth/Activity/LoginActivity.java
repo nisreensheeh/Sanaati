@@ -23,7 +23,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import com.example.sanaati.MainActivity;
+import com.example.sanaati.Customers.Activity.MainActivity;
 import com.example.sanaati.R;
 import com.example.sanaati.UsersAuth.Class.Users;
 import com.google.android.gms.tasks.OnSuccessListener;

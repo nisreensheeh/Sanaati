@@ -20,15 +20,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.sanaati.MainActivity;
+import com.example.sanaati.Customers.Activity.MainActivity;
 import com.example.sanaati.R;
 import com.example.sanaati.UsersAuth.Class.Users;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -145,9 +143,7 @@ public class SignupActivity extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 //                pb.show();
-
                 final String email = inputEmail.getText().toString().trim();
                 final String password = inputPassword.getText().toString().trim();
                 final String username = name.getText().toString().trim();
@@ -170,9 +166,7 @@ public class SignupActivity extends AppCompatActivity {
                                             document.getString("password"),document.getString("location"),document.getString("type")
                                             , document.getString("rate"), document.getString("token"), document.getString("image")
                                             , document.getString("aid"), document.getString("comission")));
-
                                 }
-
                             }
                         }
                     });
@@ -210,14 +204,6 @@ public class SignupActivity extends AppCompatActivity {
                         //This method returns the time in millis
                         long timeMilli = date.getTime();
 
-//                            try{
-//                                FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(this, instanceIdResult -> {
-//                                     newToken = instanceIdResult.getToken();
-//
-//                                });
-//                            }
-//                            catch (Exception e){}
-
                         final String android_id = Settings.Secure.getString(SignupActivity.this.getContentResolver(), Settings.Secure.ANDROID_ID);
                         if(type.equals("صاحب حرفة")){
                             if(job.equals("--اختر--")) {
@@ -232,9 +218,6 @@ public class SignupActivity extends AppCompatActivity {
                                         ImageName.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                             @Override
                                             public void onSuccess(Uri uri) {
-//                                                Users employees = new Users(timeMilli+username,username,email,address,userphone,job,password,"x,y","موظف"
-//                                                        , "", newToken, uri.toString()
-//                                                        , "", "");
 
                                                 Map<String, Object> user = new HashMap<>();
                                                 user.put("userid",timeMilli+username );
@@ -307,9 +290,6 @@ public class SignupActivity extends AppCompatActivity {
                                     ImageName.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                         @Override
                                         public void onSuccess(Uri uri) {
-//                                                Users employees = new Users(timeMilli+username,username,email,address,userphone,job,password,"x,y","موظف"
-//                                                        , "", newToken, uri.toString()
-//                                                        , "", "");
 
                                             Map<String, Object> user = new HashMap<>();
                                             user.put("userid",timeMilli+username );
@@ -365,14 +345,11 @@ public class SignupActivity extends AppCompatActivity {
                                                     });
                                         }
                                     });
-
                                 }
                             });
-
                         }
                     }
                 }
-
             }
         });
     }

@@ -1,31 +1,32 @@
-package com.example.sanaati;
+package com.example.sanaati.Customers.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.EditText;
+import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
+import com.example.sanaati.Customers.Fragment.MainFragment;
+import com.example.sanaati.Customers.Fragment.ProfileFragment;
+import com.example.sanaati.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class MainActivity extends AppCompatActivity {
 
-    CardView serviceCard, LocationsCard;
+    CardView serviceCard, LocationsCard, topRatedLay, secondCard;
     RelativeLayout homeRel, profileRel;
     FloatingActionButton fab;
-    EditText search_et;
-    Button search_btn;
+    FrameLayout frameLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,11 +34,14 @@ public class MainActivity extends AppCompatActivity {
 
         serviceCard = findViewById(R.id.serviceCard);
         LocationsCard = findViewById(R.id.LocationsCard);
+        topRatedLay = findViewById(R.id.topRatedLay);
+        secondCard = findViewById(R.id.secondCard);
         homeRel = findViewById(R.id.homeRel);
         profileRel = findViewById(R.id.profileRel);
         fab = findViewById(R.id.fab);
-        search_et = findViewById(R.id.search_et);
-        search_btn = findViewById(R.id.search_btn);
+
+        frameLayout = findViewById(R.id.frameLayout);
+
 
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {
@@ -57,8 +61,44 @@ public class MainActivity extends AppCompatActivity {
                 });
 
 
-    }
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frameLayout, new MainFragment());
+        ft.commit();
 
+        profileRel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.setCustomAnimations(R.anim.down_to_top,R.anim.top_to_down,R.anim.down_to_top,R.anim.top_to_down);
+                ft.addToBackStack(null);
+                ft.replace(R.id.frameLayout, new ProfileFragment());
+                ft.commit();
+            }
+        });
+
+        homeRel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//                ft.setCustomAnimations(R.anim.down_to_top,R.anim.top_to_down,R.anim.down_to_top,R.anim.top_to_down);
+//                ft.addToBackStack(null);
+//                ft.replace(R.id.frameLayout, new MainFragment());
+//                ft.commit();
+                recreate();
+            }
+        });
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.setCustomAnimations(R.anim.down_to_top,R.anim.top_to_down,R.anim.down_to_top,R.anim.top_to_down);
+                ft.addToBackStack(null);
+                ft.replace(R.id.frameLayout, new FabFragment());
+                ft.commit();
+            }
+        });
+    }
 
     private void UploadToken() {
 

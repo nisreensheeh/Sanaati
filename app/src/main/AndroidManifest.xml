@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Sanaati">
         <activity android:name=".UsersAuth.Activity.SignupActivity"/>
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".Customers.Activity.MainActivity"/>
         <activity android:name=".UsersAuth.Activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
