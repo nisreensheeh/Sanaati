@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview1"
+        android:layout_width="match_parent"
+        app:cardCornerRadius="15dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:elevation="15dp"
+        android:layoutDirection="rtl">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textDirection="rtl"
+            android:layoutDirection="rtl">
+
+            <ImageView
+                android:id="@+id/postImage1"
+                android:layout_width="65dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_height="65dp"
+                android:scaleType="center"
+                android:background="@drawable/initimage"/>
+
+            <TextView
+                android:id="@+id/tvEmpName1"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:singleLine="true"
+                android:layout_toLeftOf="@+id/postImage1"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:gravity="right"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="5dp"
+                android:textStyle="bold"
+                android:fontFamily="serif"
+                android:textColor="#000000"
+                android:text="الاسم للموظف" />
+            <TextView
+                android:id="@+id/tvCraft1"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:layout_below="@+id/tvEmpName1"
+                android:layout_toLeftOf="@+id/postImage1"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:gravity="right"
+                android:layout_marginTop="15dp"
+                android:fontFamily="serif"
+                android:layout_marginBottom="5dp"
+                android:textColor="#000000"
+                android:text="حرفته" />
+            <TextView
+                android:id="@+id/distance1"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="15dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:gravity="left"
+                android:fontFamily="serif"
+                android:textColor="#000000"
+                android:text="مسافة" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview2"
+        android:layout_below="@id/cardview1"
+        android:layout_width="match_parent"
+        app:cardCornerRadius="15dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:elevation="15dp"
+        android:layoutDirection="rtl">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textDirection="rtl"
+            android:layoutDirection="rtl">
+
+            <ImageView
+                android:id="@+id/postImage2"
+                android:layout_width="65dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_height="65dp"
+                android:scaleType="center"
+                android:background="@drawable/initimage"/>
+
+            <TextView
+                android:id="@+id/tvEmpName2"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:singleLine="true"
+                android:layout_toLeftOf="@+id/postImage2"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:gravity="right"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="5dp"
+                android:textStyle="bold"
+                android:fontFamily="serif"
+                android:textColor="#000000"
+                android:text="الاسم للموظف" />
+            <TextView
+                android:id="@+id/tvCraft2"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:layout_below="@+id/tvEmpName2"
+                android:layout_toLeftOf="@+id/postImage2"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:gravity="right"
+                android:layout_marginTop="15dp"
+                android:fontFamily="serif"
+                android:layout_marginBottom="5dp"
+                android:textColor="#000000"
+                android:text="حرفته" />
+            <TextView
+                android:id="@+id/distance2"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="15dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:gravity="left"
+                android:fontFamily="serif"
+                android:textColor="#000000"
+                android:text="مسافة" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview3"
+        android:layout_below="@id/cardview2"
+        android:layout_width="match_parent"
+        app:cardCornerRadius="15dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:elevation="15dp"
+        android:layoutDirection="rtl">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textDirection="rtl"
+            android:layoutDirection="rtl">
+
+            <ImageView
+                android:id="@+id/postImage3"
+                android:layout_width="65dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_height="65dp"
+                android:scaleType="center"
+                android:background="@drawable/initimage"/>
+
+            <TextView
+                android:id="@+id/tvEmpName3"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:singleLine="true"
+                android:layout_toLeftOf="@+id/postImage3"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:gravity="right"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="5dp"
+                android:textStyle="bold"
+                android:fontFamily="serif"
+                android:textColor="#000000"
+                android:text="الاسم للموظف" />
+            <TextView
+                android:id="@+id/tvCraft3"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:layout_below="@+id/tvEmpName3"
+                android:layout_toLeftOf="@+id/postImage3"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:gravity="right"
+                android:layout_marginTop="15dp"
+                android:fontFamily="serif"
+                android:layout_marginBottom="5dp"
+                android:textColor="#000000"
+                android:text="حرفته" />
+            <TextView
+                android:id="@+id/distance3"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="15dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:gravity="left"
+                android:fontFamily="serif"
+                android:textColor="#000000"
+                android:text="مسافة" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview4"
+        android:layout_below="@id/cardview3"
+        android:layout_width="match_parent"
+        app:cardCornerRadius="15dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:elevation="15dp"
+        android:layoutDirection="rtl">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textDirection="rtl"
+            android:layoutDirection="rtl">
+
+            <ImageView
+                android:id="@+id/postImage4"
+                android:layout_width="65dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_height="65dp"
+                android:scaleType="center"
+                android:background="@drawable/initimage"/>
+
+            <TextView
+                android:id="@+id/tvEmpName4"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:singleLine="true"
+                android:layout_toLeftOf="@+id/postImage4"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:gravity="right"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="5dp"
+                android:textStyle="bold"
+                android:fontFamily="serif"
+                android:textColor="#000000"
+                android:text="الاسم للموظف" />
+            <TextView
+                android:id="@+id/tvCraft4"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:layout_below="@+id/tvEmpName4"
+                android:layout_toLeftOf="@+id/postImage4"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:gravity="right"
+                android:layout_marginTop="15dp"
+                android:fontFamily="serif"
+                android:layout_marginBottom="5dp"
+                android:textColor="#000000"
+                android:text="حرفته" />
+            <TextView
+                android:id="@+id/distance4"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="15dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:gravity="left"
+                android:fontFamily="serif"
+                android:textColor="#000000"
+                android:text="مسافة" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview5"
+        android:layout_below="@id/cardview4"
+        android:layout_width="match_parent"
+        app:cardCornerRadius="15dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:elevation="15dp"
+        android:layoutDirection="rtl">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textDirection="rtl"
+            android:layoutDirection="rtl">
+
+            <ImageView
+                android:id="@+id/postImage5"
+                android:layout_width="65dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_height="65dp"
+                android:scaleType="center"
+                android:background="@drawable/initimage"/>
+
+            <TextView
+                android:id="@+id/tvEmpName5"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:singleLine="true"
+                android:layout_toLeftOf="@+id/postImage5"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:gravity="right"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="5dp"
+                android:textStyle="bold"
+                android:fontFamily="serif"
+                android:textColor="#000000"
+                android:text="الاسم للموظف" />
+            <TextView
+                android:id="@+id/tvCraft5"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:layout_below="@+id/tvEmpName5"
+                android:layout_toLeftOf="@+id/postImage5"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:gravity="right"
+                android:layout_marginTop="15dp"
+                android:fontFamily="serif"
+                android:layout_marginBottom="5dp"
+                android:textColor="#000000"
+                android:text="حرفته" />
+            <TextView
+                android:id="@+id/distance5"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textSize="16dp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="15dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:gravity="left"
+                android:fontFamily="serif"
+                android:textColor="#000000"
+                android:text="مسافة" />
+
+
+        </RelativeLayout>
+
+
+
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

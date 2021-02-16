@@ -1,5 +1,6 @@
 package com.example.sanaati.Customers.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.EditText;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import com.example.sanaati.Customers.Activity.MapsActivity;
+import com.example.sanaati.Customers.Activity.ServisesActivity;
 import com.example.sanaati.R;
 
 public class MainFragment extends Fragment {
@@ -37,6 +40,7 @@ public class MainFragment extends Fragment {
         LocationsCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(getContext(), MapsActivity.class));
 
             }
         });
@@ -44,7 +48,7 @@ public class MainFragment extends Fragment {
         serviceCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(getContext(), ServisesActivity.class));
             }
         });
 

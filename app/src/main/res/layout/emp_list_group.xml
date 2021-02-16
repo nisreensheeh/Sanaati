@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#D50485CC">
+    <TextView
+        android:id="@+id/hirfa_v"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:text="شهر الإصدار"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:textStyle="bold"
+        android:layout_centerVertical="true"
+        android:textSize="22dp"
+        android:textColor="#ffffff"/>
+
+
+
+    <ImageView
+        android:layout_width="40dp"
+        android:id="@+id/im"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="5dp"
+        android:backgroundTint="@color/white"
+        android:layout_alignParentLeft="true"
+        android:layout_height="40dp" />
+
+</RelativeLayout>

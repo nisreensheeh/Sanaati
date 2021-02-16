@@ -1,4 +1,4 @@
-package com.example.sanaati.Customers.Activity;
+package com.example.sanaati.Customers.Fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

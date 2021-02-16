@@ -2,7 +2,6 @@ package com.example.sanaati.Customers.Activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.SharedPreferences;
@@ -11,6 +10,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
+import com.example.sanaati.Customers.Fragment.FabFragment;
 import com.example.sanaati.Customers.Fragment.MainFragment;
 import com.example.sanaati.Customers.Fragment.ProfileFragment;
 import com.example.sanaati.R;
