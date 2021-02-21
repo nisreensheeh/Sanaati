@@ -5,13 +5,13 @@ import com.example.sanaati.UsersAuth.Class.Users;
 import java.util.ArrayList;
 
 public class EmpByJob {
-    String job;
-    ArrayList<Users> info;
+    public String job = "";
+    public ArrayList<Users> info = null;
 
-    public EmpByJob(String job, ArrayList<Users> info) {
+    public EmpByJob(String job) {
         this.job = job;
-        this.info = info;
+        info = new ArrayList<>();
     }
 
-
+    public void Add(Users ch){ info.add(ch); }
 }

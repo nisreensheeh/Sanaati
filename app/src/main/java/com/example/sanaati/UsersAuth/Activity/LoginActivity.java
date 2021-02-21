@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -15,6 +16,7 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -31,6 +33,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.iigo.library.PeasLoadingView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,11 +58,11 @@ public class LoginActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
 
-        if (!getSharedPreferences("Info", Context.MODE_PRIVATE).getString("userid","").equals("")) {
-//            GPSTracker gpsTracker = new GPSTracker(LoginActivity.this);
-//            location = gpsTracker.getLocation();
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            finish(); }
+//        if (!getSharedPreferences("Info", Context.MODE_PRIVATE).getString("userid","").equals("")) {
+////            GPSTracker gpsTracker = new GPSTracker(LoginActivity.this);
+////            location = gpsTracker.getLocation();
+//            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+//            finish(); }
 
         db = FirebaseFirestore.getInstance();
         name = (EditText) findViewById(R.id.username);
@@ -79,22 +82,32 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        PeasLoadingView peasLoadingView = findViewById(R.id.plv_loading1);
+        peasLoadingView.setPeasCount(20);//set the peas count
+        peasLoadingView.setInterpolator(new LinearInterpolator()); //set the animation interpolator
+        peasLoadingView.setPeasColors(new int[]{Color.RED, Color.WHITE, Color.GREEN, Color.BLUE, Color.YELLOW, Color.MAGENTA, Color.GRAY}); //set the color array
+        peasLoadingView.setVisibility(View.INVISIBLE);
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pb.show();
+//                pb.show();
+                peasLoadingView.setVisibility(View.VISIBLE);
+                peasLoadingView.start();
                 String username = name.getText().toString();
                 final String password = inputPassword.getText().toString();
 
                 if (username.equals("")) {
                     Toast.makeText(getApplicationContext(), "ادخل اسمك", Toast.LENGTH_SHORT).show();
-                    pb.dismiss();
+//                    pb.dismiss();
+                    peasLoadingView.stop(); //stop animation
                     return;
                 }
 
                 if (password.equals("")) {
                     Toast.makeText(getApplicationContext(), "ادخل كلمة السر", Toast.LENGTH_SHORT).show();
-                    pb.dismiss();
+//                    pb.dismiss();
+                    peasLoadingView.stop(); //stop animation
                     return;
                 }
 
@@ -109,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         List<DocumentSnapshot> gr = queryDocumentSnapshots.getDocuments();
                         if(gr==null){
-
+                            peasLoadingView.stop(); //stop animation
                         }else{
                             if (gr.size() != 0) {
                                 for (int i = 0; i < gr.size(); i++) {
@@ -174,12 +187,14 @@ public class LoginActivity extends AppCompatActivity {
                                                 startActivity(intent);
                                                 finish();
                                             }else{
-                                                pb.dismiss();
-                                                Toast.makeText(LoginActivity.this, "المستخدم غير موجود1", Toast.LENGTH_SHORT).show();
+//                                                pb.dismiss();
+                                                peasLoadingView.stop(); //stop animation
+                                                Toast.makeText(LoginActivity.this, "المستخدم غير موجود", Toast.LENGTH_SHORT).show();
                                             }
                                         }else{
-                                            pb.dismiss();
-                                            Toast.makeText(LoginActivity.this, "المستخدم غير موجو2د", Toast.LENGTH_SHORT).show();
+//                                            pb.dismiss();
+                                            peasLoadingView.stop(); //stop animation
+                                            Toast.makeText(LoginActivity.this, "المستخدم غير موجود", Toast.LENGTH_SHORT).show();
                                         }
 
                                     }

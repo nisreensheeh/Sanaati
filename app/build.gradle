@@ -49,7 +49,7 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.firebase:firebase-firestore'
-
+    implementation 'com.github.samlss:PeasLoadingView:1.2'
     implementation 'com.budiyev.android:code-scanner:2.1.0'
     implementation 'com.github.armcha:SpaceNavigationView:1.6.0'
     implementation 'com.duolingo.open:rtl-viewpager:2.0.0'

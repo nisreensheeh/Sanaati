@@ -2,11 +2,13 @@ package com.example.sanaati.UsersAuth.Activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.LinearInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -27,18 +29,21 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.iigo.library.PeasLoadingView;
 import com.squareup.picasso.Picasso;
 
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SignupActivity extends AppCompatActivity {
@@ -55,11 +60,12 @@ public class SignupActivity extends AppCompatActivity {
     String newToken = "";
     String ImageUri="";
     Uri ImageData;
+    ArrayList<String> jobs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_signup);
 
         btnSignIn = (Button) findViewById(R.id.sign_in_button);
@@ -75,7 +81,39 @@ public class SignupActivity extends AppCompatActivity {
         jobrel = findViewById(R.id.job_spinner_lay);
         profileimage = findViewById(R.id.profileimage);
 
-        db = FirebaseFirestore.getInstance();
+        jobs = new ArrayList<>();
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Jobs")
+                .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                List<DocumentSnapshot> list = queryDocumentSnapshots.getDocuments();
+                for(int i=0; i<list.size(); i++) {
+                    jobs.add(list.get(i).getString("name"));
+                }
+//                /       if(jobs.size()!=0){
+                    ArrayAdapter<String> jobaadapter = new ArrayAdapter<String>(SignupActivity.this, android.R.layout.simple_spinner_item, jobs);
+                    jobaadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    job_spinner.setAdapter(jobaadapter);
+//        }
+
+                    job_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            job = parent.getSelectedItem().toString();
+                            Toast.makeText(SignupActivity.this, job, Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+            }
+        });
+
+
         final String[] typeSpinnerarray = new String[]{"--اختر--", "صاحب حرفة", "طالب خدمة"};
 
         ArrayAdapter<String> typeaadapter = new ArrayAdapter<String>(this,
@@ -99,23 +137,7 @@ public class SignupActivity extends AppCompatActivity {
 
             }
         });
-        final String[] jobSpinnerarray = new String[]{"--اختر--", "ميكانيكي", "موسرجي","كهربجي"};
 
-        ArrayAdapter<String> jobaadapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, jobSpinnerarray);
-        typeaadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        job_spinner.setAdapter(jobaadapter);
-        job_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                job = parent.getSelectedItem().toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
         profileimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,9 +162,19 @@ public class SignupActivity extends AppCompatActivity {
 
         ArrayList<Users> users = new ArrayList<>();
         users.clear();
+
+
+        PeasLoadingView peasLoadingView = findViewById(R.id.plv_loading1);
+        peasLoadingView.setPeasCount(20);//set the peas count
+        peasLoadingView.setInterpolator(new LinearInterpolator()); //set the animation interpolator
+        peasLoadingView.setPeasColors(new int[]{Color.RED, Color.WHITE, Color.GREEN, Color.BLUE, Color.YELLOW, Color.MAGENTA, Color.GRAY}); //set the color array
+        peasLoadingView.setVisibility(View.INVISIBLE);
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                peasLoadingView.setVisibility(View.VISIBLE);
+                peasLoadingView.start(); //start animation
 //                pb.show();
                 final String email = inputEmail.getText().toString().trim();
                 final String password = inputPassword.getText().toString().trim();
@@ -197,6 +229,7 @@ public class SignupActivity extends AppCompatActivity {
                         }
                     }
                     if(pos>0){
+                        peasLoadingView.stop(); //stop animation
                         Toast.makeText(SignupActivity.this, "هذا الاسم موجود, لا يمكن تكرار الاسم ", Toast.LENGTH_SHORT).show();
                         return;
                     }else{
@@ -259,6 +292,7 @@ public class SignupActivity extends AppCompatActivity {
                                                             @Override
                                                             public void onComplete(@NonNull Task<Void> task) {
                                                                 if(task.isSuccessful()){
+                                                                    peasLoadingView.stop(); //stop animation
                                                                     Toast.makeText(SignupActivity.this, "تم التسجيل بنجاح", Toast.LENGTH_SHORT).show();
                                                                     startActivity(new Intent(SignupActivity.this, MainActivity.class));
                                                                 }

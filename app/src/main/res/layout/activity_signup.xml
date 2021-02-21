@@ -39,20 +39,14 @@
                 android:layout_marginBottom="30dp"
                 android:textSize="28dp"/>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/namef"
-                android:background="@drawable/shape"
-                android:textColorHint="#ffffff"
-                android:layout_below="@id/logo_text">
 
                 <EditText
                     android:id="@+id/nameField"
+                    android:background="@drawable/shape"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="أسم المستخدم"
-                    android:textColorHint="#ffffff"
+                    android:textColorHint="@color/colorPrimary"
                     android:textSize="24dp"
                     android:padding="5dp"
                     android:drawableTint="#ffffff"
@@ -60,98 +54,77 @@
                     android:backgroundTint="#ffffff"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
+                    android:layout_marginTop="5dp"
                     android:singleLine="true"
-                    android:textColor="#ffffff" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:id="@+id/emailf"
-                android:background="@drawable/shape"
-                android:textColorHint="#ffffff"
-                android:layout_below="@id/namef">
+                    android:textColor="@color/black"
+                    android:layout_below="@id/logo_text" />
 
                 <EditText
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="الايميل"
-                    android:textColorHint="#ffffff"
+                    android:textColorHint="@color/colorPrimary"
                     android:textSize="24dp"
                     android:padding="5dp"
                     android:drawableTint="#ffffff"
                     android:drawablePadding="5dp"
                     android:backgroundTint="#ffffff"
                     android:inputType="text"
+                    android:layout_marginTop="5dp"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@android:color/black"
+                    android:background="@drawable/shape"
+                    android:layout_below="@id/nameField"/>
 
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:id="@+id/adressf"
-                android:background="@drawable/shape"
-                android:textColorHint="#ffffff"
-                android:layout_below="@id/emailf">
 
                 <EditText
                     android:id="@+id/address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="العنوان"
-                    android:textColorHint="#ffffff"
+                    android:textColorHint="@color/colorPrimary"
                     android:textSize="24dp"
                     android:padding="5dp"
                     android:drawableTint="#ffffff"
                     android:drawablePadding="5dp"
                     android:backgroundTint="#ffffff"
+                    android:layout_marginTop="5dp"
                     android:inputType="text"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@android:color/black"
+                    android:layout_below="@id/email"
+                    android:background="@drawable/shape"/>
 
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/phonef"
-                android:textColorHint="#ffffff"
-                android:layout_below="@+id/adressf"
-                android:background="@drawable/shape"
-                android:layout_marginTop="5dp">
 
                 <EditText
                     android:id="@+id/phoneField"
+                    android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="رقم الهاتف"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
-                    android:textColorHint="#ffffff"
+                    android:textColorHint="@color/colorPrimary"
                     android:textSize="24dp"
                     android:padding="5dp"
                     android:drawableTint="#ffffff"
                     android:drawablePadding="5dp"
                     android:backgroundTint="#ffffff"
                     android:singleLine="true"
-                    android:textColor="@android:color/white" />
+                    android:textColor="@android:color/black"
+                    android:layout_below="@id/address"
+                    android:background="@drawable/shape"/>
 
-            </com.google.android.material.textfield.TextInputLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
+                android:layout_height="45dp"
                 android:layout_marginTop="5dp"
                 android:id="@+id/type_spinner_lay"
                 android:background="@drawable/shape"
-                android:layout_below="@id/phonef">
+                android:layout_below="@id/phoneField">
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -161,7 +134,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="55dp"
+                android:layout_height="45dp"
                 android:layout_marginTop="5dp"
                 android:id="@+id/job_spinner_lay"
                 android:background="@drawable/shape"
@@ -173,27 +146,7 @@
                     android:textDirection="rtl"
                     android:id="@+id/job_spinner"/>
             </RelativeLayout>
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:orientation="horizontal"
-                android:layout_gravity="center"
-                android:layout_marginLeft="15dp"
-                android:layout_below="@+id/job_spinner_lay"
-                android:layout_marginRight="15dp"
-                android:layout_marginBottom="20dp"
-                android:layout_marginTop="20dp"
-                android:id="@+id/profileimage"
-                android:src="@drawable/ic_baseline_image_24" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/passf"
-                android:textColorHint="#ffffff"
-                android:layout_below="@id/profileimage"
-                android:background="@drawable/shape"
-                android:layout_marginTop="5dp">
 
                 <EditText
                     android:id="@+id/password"
@@ -201,19 +154,33 @@
                     android:layout_height="wrap_content"
                     android:focusableInTouchMode="true"
                     android:hint="كلمة السر"
-                    android:textColorHint="#ffffff"
+                    android:textColorHint="@color/colorPrimary"
                     android:textSize="24dp"
                     android:padding="5dp"
-                    android:drawableTint="#ffffff"
+                    android:drawableTint="@color/colorPrimary"
                     android:drawablePadding="5dp"
                     android:backgroundTint="#ffffff"
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:textColor="#797578" />
+                    android:textColor="#797578"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/shape"
+                    android:layout_below="@id/job_spinner_lay"
+                    android:gravity="right"/>
 
-            </com.google.android.material.textfield.TextInputLayout>
-
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
+                android:layout_below="@+id/password"
+                android:layout_marginRight="15dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/profileimage"
+                android:src="@drawable/ic_baseline_image_24" />
 
             <Button
                 android:id="@+id/sign_up_button"
@@ -225,7 +192,7 @@
                 android:textSize="24dp"
                 android:textColor="#ffff"
                 android:textStyle="bold"
-                android:layout_below="@id/passf"/>
+                android:layout_below="@id/profileimage"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -259,10 +226,18 @@
                     android:textStyle="bold"
                     android:text="نسيت كلمة السر؟"
                     android:textAllCaps="false"
-                    android:textColor="#ffffff"
+                    android:textColor="@color/white"
                     android:layout_below="@id/sign_up_button"/>
 
             </LinearLayout>
+            <com.iigo.library.PeasLoadingView
+                android:id="@+id/plv_loading1"
+                app:peas_count="8"
+                app:peas_radius="8.5"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"/>
         </RelativeLayout>
 
     </ScrollView>
