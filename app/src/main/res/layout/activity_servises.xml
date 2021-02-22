@@ -37,18 +37,18 @@
             app:cardElevation="10dp"
             android:layout_centerHorizontal="true"
             android:background="#ffffff"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
+            android:layout_marginTop="0dp"
             android:layout_height="wrap_content">
             <ExpandableListView
                 android:id="@+id/expandableListView"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_marginTop="15sp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
                 android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
-                android:divider="@android:color/darker_gray"
-                android:dividerHeight="0.5sp"
+                android:divider="@android:color/white"
+                android:dividerHeight="5dp"
                 android:groupIndicator="@drawable/expandable_icon"/>
         </androidx.cardview.widget.CardView>
 

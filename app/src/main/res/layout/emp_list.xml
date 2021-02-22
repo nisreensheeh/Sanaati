@@ -19,14 +19,13 @@
             android:textDirection="rtl"
             android:layoutDirection="rtl">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/postImage1"
                 android:layout_width="65dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
                 android:layout_height="65dp"
-                android:scaleType="center"
-                android:background="@drawable/initimage"/>
+                android:background="@drawable/ic_baseline_image_24"/>
 
             <TextView
                 android:id="@+id/tvEmpName1"
@@ -91,14 +90,13 @@
             android:textDirection="rtl"
             android:layoutDirection="rtl">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/postImage2"
                 android:layout_width="65dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
                 android:layout_height="65dp"
-                android:scaleType="center"
-                android:background="@drawable/initimage"/>
+                android:background="@drawable/ic_baseline_image_24"/>
 
             <TextView
                 android:id="@+id/tvEmpName2"
@@ -163,14 +161,13 @@
             android:textDirection="rtl"
             android:layoutDirection="rtl">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/postImage3"
                 android:layout_width="65dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
                 android:layout_height="65dp"
-                android:scaleType="center"
-                android:background="@drawable/initimage"/>
+                android:background="@drawable/ic_baseline_image_24"/>
 
             <TextView
                 android:id="@+id/tvEmpName3"
@@ -235,14 +232,13 @@
             android:textDirection="rtl"
             android:layoutDirection="rtl">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/postImage4"
                 android:layout_width="65dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
                 android:layout_height="65dp"
-                android:scaleType="center"
-                android:background="@drawable/initimage"/>
+                android:background="@drawable/ic_baseline_image_24"/>
 
             <TextView
                 android:id="@+id/tvEmpName4"
@@ -306,14 +302,13 @@
             android:textDirection="rtl"
             android:layoutDirection="rtl">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/postImage5"
                 android:layout_width="65dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
                 android:layout_height="65dp"
-                android:scaleType="center"
-                android:background="@drawable/initimage"/>
+                android:background="@drawable/ic_baseline_image_24"/>
 
             <TextView
                 android:id="@+id/tvEmpName5"
