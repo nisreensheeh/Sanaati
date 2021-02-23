@@ -157,13 +157,24 @@ public class LoginActivity extends AppCompatActivity {
                                         if(users.size()>0){
 
                                             if(users.get(0).name.equals(username) && users.get(0).password.equals(password)) {
-                                                pb.dismiss();
+//                                                pb.dismiss();
+                                                peasLoadingView.stop();
                                                 SharedPreferences.Editor editor =
                                                         getSharedPreferences("Info", Context.MODE_PRIVATE).edit();
                                                 editor.putString("name",username);
                                                 editor.putString("userid",users.get(0).userid);
                                                 editor.putString("type",users.get(0).type);
                                                 editor.putString("location",users.get(0).location);
+                                                editor.putString("email", users.get(0).email);
+                                                editor.putString("addressd",users.get(0).addressd);
+                                                editor.putString("phone", users.get(0).phone);
+                                                editor.putString("job",users.get(0).job);
+                                                editor.putString("password",users.get(0).password);
+                                                editor.putString("rate", users.get(0).rate);
+                                                editor.putString("token", getSharedPreferences("Info",MODE_PRIVATE).getString("token",""));
+                                                editor.putString("image",users.get(0).image);
+                                                editor.putString("aid", users.get(0).aid);
+                                                editor.putString("comission", users.get(0).comission);
                                                 editor.apply();
 //                                                GPSTracker gpsTracker = new GPSTracker(LoginActivity.this);
 //                                                location = gpsTracker.getLocation();
