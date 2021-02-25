@@ -68,17 +68,48 @@ public class ProfileFragment extends Fragment{
         star4 = rootView.findViewById(R.id.star4);
         star5 = rootView.findViewById(R.id.star5);
 
-        name.setText(getActivity().getSharedPreferences("Info", Context.MODE_PRIVATE).getString("name",""));
-        job.setText(getActivity().getSharedPreferences("Info", Context.MODE_PRIVATE).getString("job",""));
-        address.setText(getActivity().getSharedPreferences("Info", Context.MODE_PRIVATE).getString("addressd",""));
+        if(getActivity().getSharedPreferences("Info", Context.MODE_PRIVATE).getString("rate","").equals("1")){
+            star1.setImageResource(R.drawable.ic_starblue);
+            star2.setImageResource(R.drawable.ic_stargrey);
+            star3.setImageResource(R.drawable.ic_stargrey);
+            star4.setImageResource(R.drawable.ic_stargrey);
+            star5.setImageResource(R.drawable.ic_stargrey);
+        }else if(getActivity().getSharedPreferences("Info", Context.MODE_PRIVATE).getString("rate","").equals("2")){
+            star1.setImageResource(R.drawable.ic_starblue);
+            star2.setImageResource(R.drawable.ic_starblue);
+            star3.setImageResource(R.drawable.ic_stargrey);
+            star4.setImageResource(R.drawable.ic_stargrey);
+            star5.setImageResource(R.drawable.ic_stargrey);
+        }else if(getActivity().getSharedPreferences("Info", Context.MODE_PRIVATE).getString("rate","").equals("3")){
+            star1.setImageResource(R.drawable.ic_starblue);
+            star2.setImageResource(R.drawable.ic_starblue);
+            star3.setImageResource(R.drawable.ic_starblue);
+            star4.setImageResource(R.drawable.ic_stargrey);
+            star5.setImageResource(R.drawable.ic_stargrey);
+        }else if(getActivity().getSharedPreferences("Info", Context.MODE_PRIVATE).getString("rate","").equals("4")){
+            star1.setImageResource(R.drawable.ic_starblue);
+            star2.setImageResource(R.drawable.ic_starblue);
+            star3.setImageResource(R.drawable.ic_starblue);
+            star4.setImageResource(R.drawable.ic_starblue);
+        }else if(getActivity().getSharedPreferences("Info", Context.MODE_PRIVATE).getString("rate","").equals("5")){
+            star1.setImageResource(R.drawable.ic_starblue);
+            star2.setImageResource(R.drawable.ic_starblue);
+            star3.setImageResource(R.drawable.ic_starblue);
+            star4.setImageResource(R.drawable.ic_starblue);
+            star5.setImageResource(R.drawable.ic_starblue);
+        }
+
+        name.setText("مرحبا "+getActivity().getSharedPreferences("Info", Context.MODE_PRIVATE).getString("name",""));
+        job.setText("المهنة : "+getActivity().getSharedPreferences("Info", Context.MODE_PRIVATE).getString("job",""));
+        address.setText("العنوان : "+getActivity().getSharedPreferences("Info", Context.MODE_PRIVATE).getString("addressd",""));
         if(getActivity().getSharedPreferences("Info", Context.MODE_PRIVATE).getString("email","").equals("")){
             email.setVisibility(View.GONE);
         }else {
             email.setVisibility(View.VISIBLE);
-            email.setText(getActivity().getSharedPreferences("Info", Context.MODE_PRIVATE).getString("email",""));
+            email.setText("الاسم : "+getActivity().getSharedPreferences("Info", Context.MODE_PRIVATE).getString("email",""));
 
         }
-        phone.setText(getActivity().getSharedPreferences("Info", Context.MODE_PRIVATE).getString("phone",""));
+        phone.setText("هاتف : "+getActivity().getSharedPreferences("Info", Context.MODE_PRIVATE).getString("phone",""));
 
 
         Uri Imagedata= Uri.parse(getActivity().getSharedPreferences("Info", Context.MODE_PRIVATE).getString("image",""));

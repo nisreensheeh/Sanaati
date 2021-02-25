@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:textColor="#000000"
         android:layout_below="@+id/tool"
-        android:text="صمم هذا البرنامج لتسهيل دخول الموظفين الى خدماتهم في شركة كهرباء اربد"
+        android:text="صمم هذا البرنامج لتسهيل ايجاد الحرفيين بانواعهم المختلفة لتلقي الخدمة في اسرع وقت ممكن"
         android:fontFamily="sans-serif-black"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
