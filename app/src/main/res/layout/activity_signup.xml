@@ -21,24 +21,14 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="150dp"
+                android:id="@+id/img"
                 android:layout_height="150dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="10dp"
+                android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/initimage"
-                android:id="@+id/img" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/img"
-                android:id="@+id/logo_text"
-                android:text="صنعتي"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:gravity="center"
+                android:layout_marginTop="-15dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="30dp"
-                android:textSize="28dp"/>
-
+                android:background="@mipmap/ic_launcher"/>
 
                 <EditText
                     android:id="@+id/nameField"
@@ -46,7 +36,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="أسم المستخدم"
-                    android:textColorHint="@color/colorPrimary"
+                    android:textColorHint="#000000"
                     android:textSize="24dp"
                     android:padding="5dp"
                     android:drawableTint="#ffffff"
@@ -54,17 +44,17 @@
                     android:backgroundTint="#ffffff"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="-30dp"
                     android:singleLine="true"
                     android:textColor="@color/black"
-                    android:layout_below="@id/logo_text" />
+                    android:layout_below="@id/img" />
 
                 <EditText
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="الايميل"
-                    android:textColorHint="@color/colorPrimary"
+                    android:textColorHint="#000000"
                     android:textSize="24dp"
                     android:padding="5dp"
                     android:drawableTint="#ffffff"
@@ -84,7 +74,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="العنوان"
-                    android:textColorHint="@color/colorPrimary"
+                    android:textColorHint="#000000"
                     android:textSize="24dp"
                     android:padding="5dp"
                     android:drawableTint="#ffffff"
@@ -107,7 +97,7 @@
                     android:hint="رقم الهاتف"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
-                    android:textColorHint="@color/colorPrimary"
+                    android:textColorHint="#000000"
                     android:textSize="24dp"
                     android:padding="5dp"
                     android:drawableTint="#ffffff"
@@ -154,7 +144,7 @@
                     android:layout_height="wrap_content"
                     android:focusableInTouchMode="true"
                     android:hint="كلمة السر"
-                    android:textColorHint="@color/colorPrimary"
+                    android:textColorHint="#000000"
                     android:textSize="24dp"
                     android:padding="5dp"
                     android:drawableTint="@color/colorPrimary"
@@ -186,7 +176,7 @@
                 android:id="@+id/sign_up_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="-5dp"
                 android:background="@drawable/shape2"
                 android:text="إنشاء حساب"
                 android:textSize="24dp"

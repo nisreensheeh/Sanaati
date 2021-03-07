@@ -21,7 +21,7 @@
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="30dp"
-            android:src="@drawable/initimage"/>
+            android:background="@mipmap/ic_launcher"/>
 
 
         <EditText
@@ -37,16 +37,16 @@
             android:textSize="15dp"
             android:textColor="#000000"
             android:gravity="center"
+            android:textAlignment="textStart"
             android:layout_below="@id/img"
-            android:background="@drawable/shapeb"
+            android:drawableRight="@drawable/ic_baseline_email_24"
+            android:background="@drawable/shape"
             android:textColorHint="#000000"
-            android:text=""
             android:layout_marginBottom="10dp"
             android:hint="اسم المستخدم"
-            android:backgroundTint="#ffffff"
-            android:drawableTint="#ffffff"
-            android:drawablePadding="10dp"
-            android:paddingRight="5dp"/>
+            android:drawablePadding="15dp"
+            android:paddingRight="15dp"
+            tools:ignore="RtlCompat" />
 
 
 
@@ -58,20 +58,20 @@
             android:layout_marginRight="10dp"
             android:ellipsize="start"
             android:ems="10"
+            android:textAlignment="textStart"
             android:inputType="textPersonName"
             android:textSize="15dp"
             android:textColor="#000000"
             android:gravity="center"
+            android:drawableRight="@drawable/ic_baseline_lock_24"
             android:layout_below="@id/username"
-            android:background="@drawable/shapeb"
+            android:background="@drawable/shape"
             android:textColorHint="#000000"
-            android:text=""
             android:layout_marginBottom="10dp"
             android:hint="كلمة السر"
-            android:backgroundTint="#ffffff"
-            android:drawableTint="#ffffff"
-            android:drawablePadding="10dp"
-            android:paddingRight="5dp"/>
+            android:drawablePadding="15dp"
+            android:paddingRight="15dp"
+            tools:ignore="RtlCompat" />
 
         <!-- Login Button -->
 
@@ -85,7 +85,8 @@
             android:layout_below="@id/password"
             android:textSize="24dp"
             android:textStyle="bold"
-            android:textColor="#ffff"
+            android:fontFamily="serif"
+            android:textColor="#ffffff"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"/>
 
@@ -107,6 +108,7 @@
                 android:text="انشاء حساب"
                 android:textAllCaps="false"
                 android:layout_marginRight="7dp"
+                android:fontFamily="serif"
                 android:textStyle="bold"
                 android:background="@drawable/shape2"
                 android:textColor="#ffffff"
@@ -124,6 +126,7 @@
                 android:text="نسيت كلمة السر"
                 android:layout_gravity="center"
                 android:background="@drawable/shape2"
+                android:fontFamily="serif"
                 android:textAllCaps="false"
                 android:textSize="14dp"
                 android:textColor="#ffffff"
