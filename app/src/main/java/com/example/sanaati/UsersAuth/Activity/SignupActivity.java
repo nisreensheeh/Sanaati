@@ -66,7 +66,7 @@ public class SignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_signup);
+        setContentView(R.layout.activity_signup2);
 
         btnSignIn = (Button) findViewById(R.id.sign_in_button);
         btnSignUp = (Button) findViewById(R.id.sign_up_button);
@@ -82,7 +82,7 @@ public class SignupActivity extends AppCompatActivity {
         profileimage = findViewById(R.id.profileimage);
 
         jobs = new ArrayList<>();
-
+        jobs.add("--اختر--");
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Jobs")
                 .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -184,6 +184,8 @@ public class SignupActivity extends AppCompatActivity {
 
                 if(address.equals("") || password.equals("") || username.equals("") || userphone.equals("") || type.equals("--اختر--")){
                     Toast.makeText(SignupActivity.this, "رجاءا املئ كامل البيانات", Toast.LENGTH_SHORT).show();
+                    peasLoadingView.setVisibility(View.INVISIBLE);
+
 //                pb.dismiss();
                 }else{
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -229,9 +231,9 @@ public class SignupActivity extends AppCompatActivity {
                         }
                     }
                     if(pos>0){
-                        peasLoadingView.stop(); //stop animation
                         Toast.makeText(SignupActivity.this, "هذا الاسم موجود, لا يمكن تكرار الاسم ", Toast.LENGTH_SHORT).show();
-                        return;
+                        peasLoadingView.setVisibility(View.INVISIBLE);                        return;
+
                     }else{
                         Date date = new Date();
                         //This method returns the time in millis
@@ -241,6 +243,9 @@ public class SignupActivity extends AppCompatActivity {
                         if(type.equals("صاحب حرفة")){
                             if(job.equals("--اختر--")) {
                                 Toast.makeText(SignupActivity.this, "رجاءا اختر مهنتك", Toast.LENGTH_SHORT).show();
+//                                peasLoadingView.stop(); //stop animation
+                                peasLoadingView.setVisibility(View.INVISIBLE);
+
                             }else {
                                 FirebaseStorage storage =  FirebaseStorage.getInstance();;
                                 final StorageReference ImageName =  storage.getReference().child("image"+ImageData.getLastPathSegment());
@@ -302,6 +307,7 @@ public class SignupActivity extends AppCompatActivity {
                                                             @Override
                                                             public void onFailure(@NonNull Exception e) {
                                                                 Toast.makeText(SignupActivity.this, "لقد حدث خطأ...حاول مرة اخرى", Toast.LENGTH_SHORT).show();
+                                                                peasLoadingView.stop(); //stop animation
 
                                                             }
                                                         });
