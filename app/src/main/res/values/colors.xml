@@ -9,7 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#E3E5E6</color>
 
-    <color name="colorPrimary">#ffe76e</color>
+    <color name="colorPrimary">#DCC866</color>
     <color name="colorSecondary">#a4ecff</color>
     <color name="colorAccent">#a4ecff</color>
     <color name="bg_login">#a4ecff</color>
