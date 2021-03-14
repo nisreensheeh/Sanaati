@@ -127,7 +127,7 @@
                         android:textColor="#ffffff"
                         android:layout_gravity="center"
                         android:textSize="14dp"
-                        android:layout_marginLeft="5dp"/>
+                        android:layout_marginLeft="5dp" />
 
                     <Button
                         android:id="@+id/btn_reset_password"
