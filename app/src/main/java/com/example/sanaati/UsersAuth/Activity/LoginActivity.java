@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
         btnSignup = (Button) findViewById(R.id.btn_signup);
         btnLogin = (Button) findViewById(R.id.btn_login);
         btnReset = (Button) findViewById(R.id.btn_reset_password);
-        img=findViewById(R.id.img);
+//        img=findViewById(R.id.img);
 
         pb = new ProgressDialog(this);
         pb.setMessage("يرجى الانتظار...");
