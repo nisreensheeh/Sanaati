@@ -24,6 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sanaati.Customers.Activity.MainActivity;
 import com.example.sanaati.R;
+import com.example.sanaati.UsersAuth.Class.MultiSelectionSpinner;
 import com.example.sanaati.UsersAuth.Class.Users;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -46,7 +47,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SignupActivity extends AppCompatActivity {
+public class SignupActivity extends AppCompatActivity implements MultiSelectionSpinner.OnMultipleItemsSelectedListener {
 
     private EditText inputEmail,inputPassword,name,phone,addressd;
     private Button btnSignIn, btnSignUp, btnResetPassword;
@@ -59,6 +60,7 @@ public class SignupActivity extends AppCompatActivity {
     StorageReference storageReference;
     String newToken = "";
     String ImageUri="";
+    String jobListString;
     Uri ImageData;
     ArrayList<String> jobs;
 
@@ -83,6 +85,12 @@ public class SignupActivity extends AppCompatActivity {
 
         jobs = new ArrayList<>();
         jobs.add("--اختر--");
+
+        MultiSelectionSpinner multiSelectionListSpinner = (MultiSelectionSpinner) findViewById(R.id.spinner_string_list);
+//        multiSelectionListSpinner.setItems(jobs);
+//        multiSelectionListSpinner.setSelection(new int[]{0, 2});
+//        multiSelectionListSpinner.setListener(this);
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Jobs")
                 .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -92,6 +100,18 @@ public class SignupActivity extends AppCompatActivity {
                 for(int i=0; i<list.size(); i++) {
                     jobs.add(list.get(i).getString("name"));
                 }
+                multiSelectionListSpinner.setItems(jobs);
+                multiSelectionListSpinner.setSelection(new int[]{0});
+                multiSelectionListSpinner.setListener(SignupActivity.this);
+//                jobListString = multiSelectionListSpinner.getSelectedItemsAsString();
+//                if(jobListString.toString().contains(",--اختر--")){
+//                    jobListString.replace(",--اختر--","");
+//                }else if(jobListString.toString().contains("--اختر--,")){
+//                    jobListString.replace("--اختر--,","");
+//
+//                }
+//                Toast.makeText(SignupActivity.this, jobListString, Toast.LENGTH_SHORT).show();
+
 //                /       if(jobs.size()!=0){
                     ArrayAdapter<String> jobaadapter = new ArrayAdapter<String>(SignupActivity.this, android.R.layout.simple_spinner_item, jobs);
                     jobaadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -102,7 +122,6 @@ public class SignupActivity extends AppCompatActivity {
                         @Override
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                             job = parent.getSelectedItem().toString();
-                            Toast.makeText(SignupActivity.this, job, Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
@@ -263,7 +282,7 @@ public class SignupActivity extends AppCompatActivity {
                                                 user.put("email", email);
                                                 user.put("addressd",address );
                                                 user.put("phone", userphone);
-                                                user.put("job",job );
+                                                user.put("job",multiSelectionListSpinner.getSelectedItemsAsString() );
                                                 user.put("password",password );
                                                 user.put("location", "0.0,0.0");
                                                 user.put("type","موظف" );
@@ -408,4 +427,28 @@ public class SignupActivity extends AppCompatActivity {
             }
         }
     }
+
+    @Override
+    public void selectedIndices(List<Integer> indices, MultiSelectionSpinner spinner) {
+
+    }
+
+    @Override
+    public void selectedStrings(List<String> strings, MultiSelectionSpinner spinner) {
+        switch (spinner.getId()) {
+            case R.id.spinner_string_list:
+//                Toast.makeText(this, "List : " + strings.toString(), Toast.LENGTH_LONG).show();
+//                Toast.makeText(SignupActivity.this, jobListString, Toast.LENGTH_SHORT).show();
+                jobListString = strings.toString();
+                if(jobListString.toString().contains(",--اختر--")){
+                    jobListString.replace(",--اختر--","");
+                }else if(jobListString.toString().contains("--اختر--,")){
+                    jobListString.replaceAll("--اختر--,","");
+
+                }
+                 Toast.makeText(SignupActivity.this, jobListString, Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
+
 }

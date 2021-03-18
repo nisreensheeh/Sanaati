@@ -10,7 +10,7 @@
         android:layout_height="150dp"
         android:background="@drawable/circleshape"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="5dp"
         android:id="@+id/img1"
         android:elevation="20dp">
         <de.hdodenhof.circleimageview.CircleImageView
@@ -33,8 +33,8 @@
         app:cardCornerRadius="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="50dp">
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="5dp">
 
 
         <RelativeLayout
@@ -45,130 +45,380 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/rel"
+                android:layout_below="@id/ratingBar"
                 android:orientation="vertical"
                 android:background="@color/colorPrimary">
-                <TextView
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:gravity="center"
-                    android:text="اسم"
+                    android:layout_height="60dp"
+                    android:weightSum="3"
+                    android:orientation="vertical"
+                    android:id="@+id/name_Lay"
+                    android:paddingBottom="5dp"
+                    android:paddingTop= "5dp"
                     android:layout_below="@id/rel"
-                    android:id="@+id/name"
-                    android:textSize="35dp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="15dp"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:gravity="center"
-                    android:text="ايميل"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                    android:id="@+id/email"
-                    android:layout_marginTop="20dp"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:gravity="center"
-                    android:text="رقم"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                    android:id="@+id/phone"
-                    android:layout_marginTop="20dp"/>
+                    android:layoutDirection="rtl"
+                    android:layout_marginTop="3dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_height="0dp"
+                        android:text="الاسم:"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="12dp"
+                        android:textColor="#403E3E"
+                        android:textStyle="bold"/>
+                    <EditText
+                        android:id="@+id/name_ed"
+                        android:layout_width="match_parent"
+                        android:layout_weight="2"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center"
+                        android:layout_height="0dp"
+                        android:elevation="1dp"
+                        android:ems="10"
+                        android:background="@drawable/whiteshaperad"
+                        android:inputType="text"
+                        android:textDirection="rtl"
+                        android:paddingRight="7dp"
+                        android:paddingBottom="2dp"
+                        android:paddingTop="2dp"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="15dp"
+                        android:enabled="true"
+                        android:visibility="gone"/>
+                    <TextView
+                        android:id="@+id/name_txt"
+                        android:layout_width="match_parent"
+                        android:layout_weight="2"
+                        android:textDirection="rtl"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center"
+                        android:layout_height="0dp"
+                        android:paddingRight="7dp"
+                        android:paddingTop="7dp"
+                        android:paddingBottom="2dp"
+                        android:text="الاسم"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="15dp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
+                    android:weightSum="3"
+                    android:orientation="vertical"
+                    android:id="@+id/email_Lay"
+                    android:layout_below="@id/name_Lay"
+                    android:paddingBottom="5dp"
+                    android:paddingTop= "5dp"
+                    android:layoutDirection="rtl"
+                    android:layout_marginTop="3dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_height="0dp"
+                        android:text="الايميل:"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="12dp"
+                        android:textColor="#403E3E"
+                        android:textStyle="bold"/>
+                    <EditText
+                        android:id="@+id/email_ed"
+                        android:layout_width="match_parent"
+                        android:maxLength="20"
+                        android:layout_weight="2"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center"
+                        android:layout_height="0dp"
+                        android:ems="10"
+                        android:ellipsize="start"
+                        android:background="@drawable/whiteshaperad"
+                        android:inputType="text"
+                        android:textDirection="rtl"
+                        android:paddingRight="7dp"
+                        android:paddingBottom="2dp"
+                        android:paddingTop="2dp"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="15dp"
+                        android:enabled="true"
+                        android:visibility="gone"/>
+                    <TextView
+                        android:id="@+id/email_txt"
+                        android:layout_width="match_parent"
+                        android:layout_weight="2"
+                        android:textDirection="rtl"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center"
+                        android:layout_height="0dp"
+                        android:paddingRight="7dp"
+                        android:paddingTop="7dp"
+                        android:paddingBottom="2dp"
+                        android:text="ايميل"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="15dp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:weightSum="3"
+                    android:orientation="vertical"
+                    android:id="@+id/phone_Lay"
+                    android:paddingBottom="5dp"
+                    android:paddingTop= "5dp"
+                    android:layout_below="@id/email_Lay"
+                    android:layoutDirection="rtl"
+                    android:layout_marginTop="3dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_height="0dp"
+                        android:text="الهاتف:"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="12dp"
+                        android:textColor="#403E3E"
+                        android:textStyle="bold"/>
+                    <EditText
+                        android:id="@+id/phone_ed"
+                        android:layout_width="match_parent"
+                        android:maxLength="20"
+                        android:layout_weight="2"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center"
+                        android:layout_height="0dp"
+                        android:elevation="10dp"
+                        android:ems="10"
+                        android:ellipsize="start"
+                        android:background="@drawable/whiteshaperad"
+                        android:inputType="text"
+                        android:textDirection="rtl"
+                        android:paddingRight="7dp"
+                        android:paddingBottom="2dp"
+                        android:paddingTop="2dp"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="15dp"
+                        android:enabled="true"
+                        android:visibility="gone"/>
+                    <TextView
+                        android:id="@+id/phone_txt"
+                        android:layout_width="match_parent"
+                        android:layout_weight="2"
+                        android:textDirection="rtl"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center"
+                        android:layout_height="0dp"
+                        android:paddingRight="7dp"
+                        android:paddingTop="7dp"
+                        android:paddingBottom="2dp"
+                        android:text="هاتف"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="15dp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:weightSum="3"
+                    android:orientation="vertical"
+                    android:id="@+id/address_Lay"
+                    android:paddingBottom="5dp"
+                    android:paddingTop= "5dp"
+                    android:layout_below="@id/phone_Lay"
+                    android:layoutDirection="rtl"
+                    android:layout_marginTop="3dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_height="0dp"
+                        android:text="العنوان:"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="12dp"
+                        android:textColor="#403E3E"
+                        android:textStyle="bold"/>
+                    <EditText
+                        android:id="@+id/address_ed"
+                        android:layout_width="match_parent"
+                        android:maxLength="20"
+                        android:layout_weight="2"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center"
+                        android:layout_height="0dp"
+                        android:elevation="10dp"
+                        android:ems="10"
+                        android:ellipsize="start"
+                        android:background="@drawable/whiteshaperad"
+                        android:inputType="text"
+                        android:textDirection="rtl"
+                        android:paddingRight="7dp"
+                        android:paddingBottom="2dp"
+                        android:paddingTop="2dp"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="15dp"
+                        android:enabled="true"
+                        android:visibility="gone"/>
+                    <TextView
+                        android:id="@+id/address_txt"
+                        android:layout_width="match_parent"
+                        android:layout_weight="2"
+                        android:textDirection="rtl"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center"
+                        android:layout_height="0dp"
+                        android:paddingRight="7dp"
+                        android:paddingTop="7dp"
+                        android:paddingBottom="2dp"
+                        android:text="عنوان"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="15dp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:weightSum="3"
+                    android:orientation="vertical"
+                    android:id="@+id/job_Lay"
+                    android:paddingBottom="5dp"
+                    android:paddingTop= "5dp"
+                    android:layout_below="@id/address_Lay"
+                    android:layoutDirection="rtl"
+                    android:layout_marginTop="3dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_height="0dp"
+                        android:text="المهنة:"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="12dp"
+                        android:textColor="#403E3E"
+                        android:textStyle="bold"/>
+                    <EditText
+                        android:id="@+id/job_ed"
+                        android:layout_width="match_parent"
+                        android:maxLength="20"
+                        android:layout_weight="2"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center"
+                        android:layout_height="0dp"
+                        android:elevation="10dp"
+                        android:ems="10"
+                        android:ellipsize="start"
+                        android:background="@drawable/whiteshaperad"
+                        android:inputType="text"
+                        android:textDirection="rtl"
+                        android:paddingRight="7dp"
+                        android:paddingBottom="2dp"
+                        android:paddingTop="2dp"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="15dp"
+                        android:enabled="true"
+                        android:visibility="gone"/>
+                    <TextView
+                        android:id="@+id/job_txt"
+                        android:layout_width="match_parent"
+                        android:layout_weight="2"
+                        android:textDirection="rtl"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center"
+                        android:layout_height="0dp"
+                        android:paddingRight="7dp"
+                        android:paddingTop="7dp"
+                        android:paddingBottom="2dp"
+                        android:text="عمل"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="15dp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+                <RelativeLayout
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/blackcircleshape"
                     android:layout_centerHorizontal="true"
-                    android:gravity="center"
-                    android:text="عنوان"
-                    android:textStyle="bold"
-                    android:textSize="18dp"
-                    android:id="@+id/address"
-                    android:layout_marginTop="20dp"/>
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_gravity="center"
+                    android:id="@+id/editRel"
+                    android:elevation="20dp">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:elevation="20dp"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="8dp"
+                        android:background="@drawable/ic_baseline_edit_24"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/edit"/>
+                </RelativeLayout>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <RelativeLayout
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/blackcircleshape"
                     android:layout_centerHorizontal="true"
-                    android:gravity="center"
-                    android:text="مهنته"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                    android:id="@+id/job"
-                    android:layout_marginTop="20dp"/>
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_gravity="center"
+                    android:id="@+id/saveRel"
+                    android:elevation="20dp"
+                    android:visibility="gone">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:elevation="20dp"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="8dp"
+                        android:background="@drawable/ic_baseline_save_24"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/save" />
+                </RelativeLayout>
+
             </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/rel"
-                android:layout_width="match_parent"
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:isIndicator="true"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:weightSum="5"
-                android:layoutDirection="rtl"
+                android:numStars="5"
+                android:rating="0"
+                android:theme="@style/RatingBar"
                 android:layout_centerHorizontal="true"
                 android:layout_marginRight="40dp"
-                android:layout_marginLeft="40dp">
-                <ImageView
-                    android:id="@+id/star1"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="80dp"
-                    android:src="@drawable/ic_stargrey"
-                    android:layout_margin="10dp"/>
-                <ImageView
-                    android:id="@+id/star2"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="80dp"
-                    android:src="@drawable/ic_stargrey"
-                    android:layout_margin="10dp"/>
-                <ImageView
-                    android:id="@+id/star3"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="80dp"
-                    android:src="@drawable/ic_stargrey"
-                    android:layout_margin="10dp"/>
-                <ImageView
-                    android:id="@+id/star4"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="80dp"
-                    android:src="@drawable/ic_stargrey"
-                    android:layout_margin="10dp"/>
-                <ImageView
-                    android:id="@+id/star5"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="80dp"
-                    android:src="@drawable/ic_stargrey"
-                    android:layout_margin="10dp"/>
-            </LinearLayout>
+                android:layout_marginLeft="40dp"/>
+
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
-
-
-
-
-<!--    <Button-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="50dp"-->
-<!--        android:text="طلب خدمة"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:id="@+id/request_btn"-->
-<!--        android:textStyle="bold"-->
-<!--        android:layout_marginLeft="20dp"-->
-<!--        android:layout_marginRight="20dp"-->
-<!--        android:layout_marginBottom="10dp"-->
-<!--        android:layout_weight="1"-->
-<!--        android:textColor="#ffffff"-->
-<!--        android:textSize="18dp"-->
-<!--        android:background="@drawable/shape3"-->
-<!--        android:layout_alignParentBottom="true" />-->
 
 </RelativeLayout>

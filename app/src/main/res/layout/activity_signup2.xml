@@ -180,14 +180,32 @@
                                 android:id="@+id/job_spinner_lay"
                                 android:background="@drawable/shape"
                                 android:layout_below="@id/type_spinner_lay"
-                                android:visibility="gone">
+                                android:visibility="visible">
                                 <Spinner
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:textDirection="rtl"
                                     android:id="@+id/job_spinner"/>
-                            </RelativeLayout>
 
+                            </RelativeLayout>
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp"
+                                android:layout_marginTop="1dp"
+                                android:layout_marginBottom="10dp"
+                                android:id="@+id/job_spinner_lay2"
+                                android:background="@drawable/shape"
+                                android:layout_below="@id/job_spinner_lay"
+                                android:visibility="visible">
+
+                                <com.example.sanaati.UsersAuth.Class.MultiSelectionSpinner
+                                    android:id="@+id/spinner_string_list"
+                                    style="@style/Widget.AppCompat.Spinner.Underlined"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" />
+
+
+                            </RelativeLayout>
                             <EditText
                                 android:id="@+id/password"
                                 android:focusableInTouchMode="true"
@@ -211,7 +229,7 @@
                                 android:textColorHint="#000000"
                                 android:textSize="15dp"
                                 tools:ignore="RtlCompat"
-                                android:layout_below="@id/job_spinner_lay"/>
+                                android:layout_below="@id/job_spinner_lay2"/>
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
