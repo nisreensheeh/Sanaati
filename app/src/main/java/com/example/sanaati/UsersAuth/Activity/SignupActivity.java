@@ -87,9 +87,6 @@ public class SignupActivity extends AppCompatActivity implements MultiSelectionS
         jobs.add("--اختر--");
 
         MultiSelectionSpinner multiSelectionListSpinner = (MultiSelectionSpinner) findViewById(R.id.spinner_string_list);
-//        multiSelectionListSpinner.setItems(jobs);
-//        multiSelectionListSpinner.setSelection(new int[]{0, 2});
-//        multiSelectionListSpinner.setListener(this);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Jobs")
@@ -131,7 +128,6 @@ public class SignupActivity extends AppCompatActivity implements MultiSelectionS
                     });
             }
         });
-
 
         final String[] typeSpinnerarray = new String[]{"--اختر--", "صاحب حرفة", "طالب خدمة"};
 
@@ -251,7 +247,8 @@ public class SignupActivity extends AppCompatActivity implements MultiSelectionS
                     }
                     if(pos>0){
                         Toast.makeText(SignupActivity.this, "هذا الاسم موجود, لا يمكن تكرار الاسم ", Toast.LENGTH_SHORT).show();
-                        peasLoadingView.setVisibility(View.INVISIBLE);                        return;
+                        peasLoadingView.setVisibility(View.INVISIBLE);
+                        return;
 
                     }else{
                         Date date = new Date();

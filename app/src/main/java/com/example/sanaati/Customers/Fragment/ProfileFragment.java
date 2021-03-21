@@ -22,18 +22,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 
 import com.example.sanaati.Customers.Activity.MainActivity;
 import com.example.sanaati.R;
+import com.example.sanaati.UsersAuth.Activity.SignupActivity;
 import com.example.sanaati.UsersAuth.Class.Users;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
@@ -43,6 +50,7 @@ import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MODE_PRIVATE;
 
 public class ProfileFragment extends Fragment{
@@ -55,6 +63,10 @@ public class ProfileFragment extends Fragment{
     Button request_btn;
     RatingBar rBar;
     RelativeLayout saveRel, editRel;
+    private static final int ImageBack = 1;
+    String ImageUri="";
+    Uri ImageData;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +99,14 @@ public class ProfileFragment extends Fragment{
 
 
         name_txt.setText(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("name",""));
-        job_txt.setText(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("job",""));
+
+        if(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("type","").toString().equals("موظف")){
+            job_txt.setText(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("job",""));
+        }else{
+            job_txt.setVisibility(View.GONE);
+            job_ed.setVisibility(View.GONE);
+        }
+
         address_txt.setText(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("addressd",""));
         if(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("email","").equals("")){
             emailLin.setVisibility(View.GONE);
@@ -102,9 +121,21 @@ public class ProfileFragment extends Fragment{
         Uri Imagedata= Uri.parse(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("image",""));
         Picasso.get().load(Imagedata).into(profImg);
 
+        profImg.setEnabled(false);
+        profImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                startActivityForResult(intent,ImageBack);
+            }
+        });
+
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                profImg.setEnabled(true);
+
                 name_txt.setVisibility(View.GONE);
                 name_ed.setVisibility(View.VISIBLE);
                 name_ed.setText(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("name",""));
@@ -120,10 +151,15 @@ public class ProfileFragment extends Fragment{
                 address_txt.setVisibility(View.GONE);
                 address_ed.setVisibility(View.VISIBLE);
                 address_ed.setText(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("addressd",""));
+                if(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("type","").toString().equals("موظف")){
+                    job_txt.setVisibility(View.GONE);
+                    job_ed.setVisibility(View.VISIBLE);
+                    job_ed.setText(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("job",""));
+                }else{
+                    job_txt.setVisibility(View.GONE);
+                    job_ed.setVisibility(View.GONE);
+                }
 
-                job_txt.setVisibility(View.GONE);
-                job_ed.setVisibility(View.VISIBLE);
-                job_txt.setText(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("job",""));
 
                 editRel.setVisibility(View.GONE);
                 saveRel.setVisibility(View.VISIBLE);
@@ -133,51 +169,181 @@ public class ProfileFragment extends Fragment{
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Map<String, Object> user = new HashMap<>();
-                user.put("name", name_ed.getText().toString());
-                user.put("email", email_ed.getText().toString());
-                user.put("addressd",address_ed.getText().toString() );
-                user.put("phone", phone_ed.getText().toString());
-                user.put("job",job_ed.getText().toString() );
+
+                if(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("type","").toString().equals("موظف")){
+
+                    FirebaseStorage storage =  FirebaseStorage.getInstance();;
+                    final StorageReference ImageName =  storage.getReference().child("image"+ImageData.getLastPathSegment());
+                    ImageName.putFile(ImageData).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Toast.makeText(getActivity(), "تم تحميل الصوة", Toast.LENGTH_SHORT).show();
+                            ImageName.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+
+                                    Map<String, Object> user = new HashMap<>();
+                                    user.put("name", name_ed.getText().toString());
+                                    user.put("email", email_ed.getText().toString());
+                                    user.put("addressd",address_ed.getText().toString() );
+                                    user.put("phone", phone_ed.getText().toString());
+                                    user.put("job",job_ed.getText().toString());
+                                    user.put("image",uri.toString());
 //                user.put("password",password );
-//                user.put("image",uri.toString());
-                SharedPreferences.Editor editor = getActivity().getSharedPreferences("Info",MODE_PRIVATE).edit();
-                editor.putString("name", name_ed.getText().toString());
-                editor.putString("email", email_ed.getText().toString());
-                editor.putString("addressd",address_ed.getText().toString() );
-                editor.putString("phone", phone_ed.getText().toString());
-                editor.putString("job",job_ed.getText().toString() );
+                                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                                    db.collection("Users").document("type").collection("Employees").document(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("userid",""))
+                                            .update(user)
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if(task.isSuccessful()){
+//                                    peasLoadingView.stop(); //stop animation
+                                                        Toast.makeText(getActivity(), "تم تعديل بياناتك بنجاح", Toast.LENGTH_SHORT).show();
+                                                        SharedPreferences.Editor editor = getActivity().getSharedPreferences("Info",MODE_PRIVATE).edit();
+                                                        editor.putString("name", name_ed.getText().toString());
+                                                        editor.putString("email", email_ed.getText().toString());
+                                                        editor.putString("addressd",address_ed.getText().toString() );
+                                                        editor.putString("phone", phone_ed.getText().toString());
+                                                        editor.putString("job",job_ed.getText().toString());
 //                editor.putString("password",password );
-//                editor.putString("image",uri.toString());
-                editor.apply();
+                                                        editor.putString("image",uri.toString());
+                                                        editor.apply();
+                                                        profImg.setEnabled(false);
+                                                        name_txt.setVisibility(View.VISIBLE);
+                                                        name_ed.setVisibility(View.GONE);
+                                                        name_txt.setText(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("name",""));
 
-                name_txt.setVisibility(View.VISIBLE);
-                name_ed.setVisibility(View.GONE);
-                name_txt.setText(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("name",""));
+                                                        phone_txt.setVisibility(View.VISIBLE);
+                                                        phone_ed.setVisibility(View.GONE);
+                                                        phone_txt.setText(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("phone",""));
 
-                phone_txt.setVisibility(View.VISIBLE);
-                phone_ed.setVisibility(View.GONE);
-                phone_txt.setText(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("phone",""));
+                                                        email_txt.setVisibility(View.VISIBLE);
+                                                        email_ed.setVisibility(View.GONE);
+                                                        email_txt.setText(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("email",""));
 
-                email_txt.setVisibility(View.VISIBLE);
-                email_ed.setVisibility(View.GONE);
-                email_txt.setText(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("email",""));
+                                                        address_txt.setVisibility(View.VISIBLE);
+                                                        address_ed.setVisibility(View.GONE);
+                                                        address_txt.setText(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("addressd",""));
 
-                address_txt.setVisibility(View.VISIBLE);
-                address_ed.setVisibility(View.GONE);
-                address_txt.setText(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("addressd",""));
+                                                        job_txt.setVisibility(View.VISIBLE);
+                                                        job_ed.setVisibility(View.GONE);
+                                                        job_txt.setText(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("job",""));
 
-                job_txt.setVisibility(View.VISIBLE);
-                job_ed.setVisibility(View.GONE);
-                job_txt.setText(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("job",""));
+                                                        editRel.setVisibility(View.VISIBLE);
+                                                        saveRel.setVisibility(View.GONE);
+                                                    }
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(getActivity(), "لقد حدث خطأ...حاول مرة اخرى", Toast.LENGTH_SHORT).show();
+//                                peasLoadingView.stop(); //stop animation
 
-                editRel.setVisibility(View.VISIBLE);
-                saveRel.setVisibility(View.GONE);
+                                                }
+                                            });
+                                }
+                            });
+                        }
+                    });
 
-                //fire
+                }else {
+
+
+                    FirebaseStorage storage =  FirebaseStorage.getInstance();;
+                    final StorageReference ImageName =  storage.getReference().child("image"+ImageData.getLastPathSegment());
+                    ImageName.putFile(ImageData).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Toast.makeText(getActivity(), "تم تحميل الصوة", Toast.LENGTH_SHORT).show();
+                            ImageName.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    Map<String, Object> user = new HashMap<>();
+                                    user.put("name", name_ed.getText().toString());
+                                    user.put("email", email_ed.getText().toString());
+                                    user.put("addressd",address_ed.getText().toString() );
+                                    user.put("phone", phone_ed.getText().toString());
+                                    user.put("job",job_ed.getText().toString());
+                                    user.put("image",uri.toString());
+//                user.put("password",password );
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    db.collection("Users").document("type").collection("Customers").document(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("userid",""))
+                            .update(user)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()){
+                                        Toast.makeText(getActivity(), "تم تعديل بياناتك بنجاح", Toast.LENGTH_SHORT).show();
+                                        SharedPreferences.Editor editor = getActivity().getSharedPreferences("Info",MODE_PRIVATE).edit();
+                                        editor.putString("name", name_ed.getText().toString());
+                                        editor.putString("email", email_ed.getText().toString());
+                                        editor.putString("addressd",address_ed.getText().toString() );
+                                        editor.putString("phone", phone_ed.getText().toString());
+                                        editor.putString("image",uri.toString());
+
+//                editor.putString("password",password );
+                                        editor.apply();
+
+                                        profImg.setEnabled(false);
+                                        name_txt.setVisibility(View.VISIBLE);
+                                        name_ed.setVisibility(View.GONE);
+                                        name_txt.setText(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("name",""));
+
+                                        phone_txt.setVisibility(View.VISIBLE);
+                                        phone_ed.setVisibility(View.GONE);
+                                        phone_txt.setText(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("phone",""));
+
+                                        email_txt.setVisibility(View.VISIBLE);
+                                        email_ed.setVisibility(View.GONE);
+                                        email_txt.setText(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("email",""));
+
+                                        address_txt.setVisibility(View.VISIBLE);
+                                        address_ed.setVisibility(View.GONE);
+                                        address_txt.setText(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("addressd",""));
+
+                                        job_txt.setVisibility(View.GONE);
+                                        job_ed.setVisibility(View.GONE);
+//                                        job_txt.setText(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("job",""));
+
+                                        editRel.setVisibility(View.VISIBLE);
+                                        saveRel.setVisibility(View.GONE);
+
+                                    }
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(getActivity(), "لقد حدث خطأ...حاول مرة اخرى", Toast.LENGTH_SHORT).show();
+
+                                }
+                            });
+                                }
+                            });
+                        }
+                    });
+                }
+
+
+
+
             }
         });
         return rootView;
     }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if(requestCode == ImageBack){
+            if(resultCode == RESULT_OK){
+                ImageData = data.getData();
+                ImageUri = String.valueOf(ImageData);
+
+                Picasso.get().load(ImageData).into(profImg);
+
+            }
+        }
+    }
 }

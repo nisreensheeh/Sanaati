@@ -15,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.Sanaati">
-        <activity android:name=".Customers.Activity.EmpProfileActivity"/>
+        <activity android:name=".Customers.Activity.ChangePasswordActivity"></activity>
+        <activity android:name=".Customers.Activity.EmpProfileActivity" />
         <activity android:name=".Customers.Activity.ServisesActivity" />
         <activity android:name=".Customers.Activity.MapsActivity" />
 

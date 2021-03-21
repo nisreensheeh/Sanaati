@@ -3,13 +3,18 @@ package com.example.sanaati.Customers.Activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -20,6 +25,7 @@ import com.example.sanaati.Customers.Fragment.FabFragment;
 import com.example.sanaati.Customers.Fragment.MainFragment;
 import com.example.sanaati.Customers.Fragment.ProfileFragment;
 import com.example.sanaati.R;
+import com.example.sanaati.UsersAuth.Activity.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -49,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
 
         frameLayout = findViewById(R.id.frameLayout);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.tool);
+        setSupportActionBar(toolbar);
 
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {
@@ -107,6 +115,29 @@ public class MainActivity extends AppCompatActivity {
 //                ft.commit();
 //            }
 //        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_example, menu);
+//
+        // return true so that the menu pop up is opened
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.signout:
+                // do something
+                return true;
+            case R.id.changpass:
+                startActivity(new Intent(MainActivity.this, ChangePasswordActivity.class));
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
     }
 
     private void UploadToken() {
