@@ -60,9 +60,10 @@ public class SignupActivity extends AppCompatActivity implements MultiSelectionS
     StorageReference storageReference;
     String newToken = "";
     String ImageUri="";
-    String jobListString;
+    String jobListString= "[]";
     Uri ImageData;
     ArrayList<String> jobs;
+    MultiSelectionSpinner multiSelectionListSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,13 +81,13 @@ public class SignupActivity extends AppCompatActivity implements MultiSelectionS
         btnResetPassword = findViewById(R.id.btn_reset_password);
         type_spinner = findViewById(R.id.type_spinner);
         job_spinner = findViewById(R.id.job_spinner);
-        jobrel = findViewById(R.id.job_spinner_lay);
+        jobrel = findViewById(R.id.job_spinner_lay2);
         profileimage = findViewById(R.id.profileimage);
 
         jobs = new ArrayList<>();
         jobs.add("--اختر--");
 
-        MultiSelectionSpinner multiSelectionListSpinner = (MultiSelectionSpinner) findViewById(R.id.spinner_string_list);
+         multiSelectionListSpinner = (MultiSelectionSpinner) findViewById(R.id.spinner_string_list);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Jobs")
@@ -100,7 +101,8 @@ public class SignupActivity extends AppCompatActivity implements MultiSelectionS
                 multiSelectionListSpinner.setItems(jobs);
                 multiSelectionListSpinner.setSelection(new int[]{0});
                 multiSelectionListSpinner.setListener(SignupActivity.this);
-//                jobListString = multiSelectionListSpinner.getSelectedItemsAsString();
+
+
 //                if(jobListString.toString().contains(",--اختر--")){
 //                    jobListString.replace(",--اختر--","");
 //                }else if(jobListString.toString().contains("--اختر--,")){
@@ -110,22 +112,22 @@ public class SignupActivity extends AppCompatActivity implements MultiSelectionS
 //                Toast.makeText(SignupActivity.this, jobListString, Toast.LENGTH_SHORT).show();
 
 //                /       if(jobs.size()!=0){
-                    ArrayAdapter<String> jobaadapter = new ArrayAdapter<String>(SignupActivity.this, android.R.layout.simple_spinner_item, jobs);
-                    jobaadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    job_spinner.setAdapter(jobaadapter);
-//        }
-
-                    job_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                            job = parent.getSelectedItem().toString();
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> parent) {
-
-                        }
-                    });
+//                    ArrayAdapter<String> jobaadapter = new ArrayAdapter<String>(SignupActivity.this, android.R.layout.simple_spinner_item, jobs);
+//                    jobaadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//                    job_spinner.setAdapter(jobaadapter);
+////        }
+//
+//                    job_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//                        @Override
+//                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                            job = parent.getSelectedItem().toString();
+//                        }
+//
+//                        @Override
+//                        public void onNothingSelected(AdapterView<?> parent) {
+//
+//                        }
+//                    });
             }
         });
 
@@ -184,6 +186,8 @@ public class SignupActivity extends AppCompatActivity implements MultiSelectionS
         peasLoadingView.setInterpolator(new LinearInterpolator()); //set the animation interpolator
         peasLoadingView.setPeasColors(new int[]{Color.RED, Color.WHITE, Color.GREEN, Color.BLUE, Color.YELLOW, Color.MAGENTA, Color.GRAY}); //set the color array
         peasLoadingView.setVisibility(View.INVISIBLE);
+
+
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -256,13 +260,200 @@ public class SignupActivity extends AppCompatActivity implements MultiSelectionS
                         long timeMilli = date.getTime();
 
                         final String android_id = Settings.Secure.getString(SignupActivity.this.getContentResolver(), Settings.Secure.ANDROID_ID);
+
                         if(type.equals("صاحب حرفة")){
-                            if(job.equals("--اختر--")) {
+                            if(jobListString.equals("[]")) {
                                 Toast.makeText(SignupActivity.this, "رجاءا اختر مهنتك", Toast.LENGTH_SHORT).show();
 //                                peasLoadingView.stop(); //stop animation
                                 peasLoadingView.setVisibility(View.INVISIBLE);
 
                             }else {
+
+                                if(ImageData == null){
+                                    Map<String, Object> user = new HashMap<>();
+                                    user.put("userid",timeMilli+username );
+                                    user.put("name", username);
+                                    user.put("email", email);
+                                    user.put("addressd",address );
+                                    user.put("phone", userphone);
+                                    user.put("job",jobListString);
+                                    user.put("password",password );
+                                    user.put("location", "0.0,0.0");
+                                    user.put("type","موظف" );
+                                    user.put("rate", "5");
+                                    user.put("token", getSharedPreferences("Info",MODE_PRIVATE).getString("token",""));
+                                    user.put("image","");
+                                    user.put("aid", android_id);
+                                    user.put("comission", "0.0");
+
+                                    SharedPreferences.Editor editor = getSharedPreferences("Info",MODE_PRIVATE).edit();
+                                    editor.putString("userid",timeMilli+username);
+                                    editor.putString("name", username);
+                                    editor.putString("email", email);
+                                    editor.putString("addressd",address);
+                                    editor.putString("phone", userphone);
+                                    editor.putString("job",jobListString);
+                                    editor.putString("password",password);
+                                    editor.putString("location", "0.0,0.0");
+                                    editor.putString("type","موظف");
+                                    editor.putString("rate", "5");
+                                    editor.putString("token", getSharedPreferences("Info",MODE_PRIVATE).getString("token",""));
+                                    editor.putString("image","");
+                                    editor.putString("aid", android_id);
+                                    editor.putString("comission", "0.0");
+                                    editor.apply();
+
+                                    FirebaseFirestore db2 = FirebaseFirestore.getInstance();
+                                    db2.collection("Users").document("type").collection("Employees").document(user.get("userid").toString())
+                                            .set(user)
+                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if(task.isSuccessful()){
+                                                        peasLoadingView.stop(); //stop animation
+                                                        Toast.makeText(SignupActivity.this, "تم التسجيل بنجاح", Toast.LENGTH_SHORT).show();
+                                                        startActivity(new Intent(SignupActivity.this, MainActivity.class));
+                                                    }
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(SignupActivity.this, "لقد حدث خطأ...حاول مرة اخرى", Toast.LENGTH_SHORT).show();
+                                                    peasLoadingView.stop(); //stop animation
+
+                                                }
+                                            });
+                                }else{
+
+                                    FirebaseStorage storage =  FirebaseStorage.getInstance();
+                                    final StorageReference ImageName =  storage.getReference().child("image"+ImageData.getLastPathSegment());
+                                    ImageName.putFile(ImageData).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                        @Override
+                                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                            Toast.makeText(SignupActivity.this, "تم تحميل الصوة", Toast.LENGTH_SHORT).show();
+                                            ImageName.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                @Override
+                                                public void onSuccess(Uri uri) {
+
+                                                    Map<String, Object> user = new HashMap<>();
+                                                    user.put("userid",timeMilli+username );
+                                                    user.put("name", username);
+                                                    user.put("email", email);
+                                                    user.put("addressd",address );
+                                                    user.put("phone", userphone);
+                                                    user.put("job",jobListString);
+                                                    user.put("password",password );
+                                                    user.put("location", "0.0,0.0");
+                                                    user.put("type","موظف" );
+                                                    user.put("rate", "5");
+                                                    user.put("token", getSharedPreferences("Info",MODE_PRIVATE).getString("token",""));
+                                                    user.put("image",uri.toString());
+                                                    user.put("aid", android_id);
+                                                    user.put("comission", "0.0");
+
+                                                    SharedPreferences.Editor editor = getSharedPreferences("Info",MODE_PRIVATE).edit();
+                                                    editor.putString("userid",timeMilli+username);
+                                                    editor.putString("name", username);
+                                                    editor.putString("email", email);
+                                                    editor.putString("addressd",address);
+                                                    editor.putString("phone", userphone);
+                                                    editor.putString("job",jobListString);
+                                                    editor.putString("password",password);
+                                                    editor.putString("location", "0.0,0.0");
+                                                    editor.putString("type","موظف");
+                                                    editor.putString("rate", "5");
+                                                    editor.putString("token", getSharedPreferences("Info",MODE_PRIVATE).getString("token",""));
+                                                    editor.putString("image",uri.toString());
+                                                    editor.putString("aid", android_id);
+                                                    editor.putString("comission", "0.0");
+                                                    editor.apply();
+
+                                                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                                                    db.collection("Users").document("type").collection("Employees").document(user.get("userid").toString())
+                                                            .set(user)
+                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                @Override
+                                                                public void onComplete(@NonNull Task<Void> task) {
+                                                                    if(task.isSuccessful()){
+                                                                        peasLoadingView.stop(); //stop animation
+                                                                        Toast.makeText(SignupActivity.this, "تم التسجيل بنجاح", Toast.LENGTH_SHORT).show();
+                                                                        startActivity(new Intent(SignupActivity.this, MainActivity.class));
+                                                                    }
+                                                                }
+                                                            })
+                                                            .addOnFailureListener(new OnFailureListener() {
+                                                                @Override
+                                                                public void onFailure(@NonNull Exception e) {
+                                                                    Toast.makeText(SignupActivity.this, "لقد حدث خطأ...حاول مرة اخرى", Toast.LENGTH_SHORT).show();
+                                                                    peasLoadingView.stop(); //stop animation
+
+                                                                }
+                                                            });
+                                                }
+                                            });
+
+                                        }
+                                    });
+                                }
+                            }
+
+                        }else if(type.equals("طالب خدمة")){
+                            if(ImageData == null){
+                                Map<String, Object> user = new HashMap<>();
+                                user.put("userid",timeMilli+username );
+                                user.put("name", username);
+                                user.put("email", email);
+                                user.put("addressd",address );
+                                user.put("phone", userphone);
+                                user.put("job",jobListString );
+                                user.put("password",password );
+                                user.put("location", "0.0,0.0");
+                                user.put("type","زبون" );
+                                user.put("rate", "5");
+                                user.put("token", getSharedPreferences("Info",MODE_PRIVATE).getString("token",""));
+                                user.put("image","");
+                                user.put("aid", android_id);
+                                user.put("comission", "0.0");
+
+                                SharedPreferences.Editor editor = getSharedPreferences("Info",MODE_PRIVATE).edit();
+                                editor.putString("userid",timeMilli+username );
+                                editor.putString("name", username);
+                                editor.putString("email", email);
+                                editor.putString("addressd",address );
+                                editor.putString("phone", userphone);
+                                editor.putString("job",jobListString );
+                                editor.putString("password",password );
+                                editor.putString("location", "0.0,0.0");
+                                editor.putString("type","زبون" );
+                                editor.putString("rate", "5");
+                                editor.putString("token", getSharedPreferences("Info",MODE_PRIVATE).getString("token",""));
+                                editor.putString("image","");
+                                editor.putString("aid", android_id);
+                                editor.putString("comission", "0.0");
+                                editor.apply();
+
+                                FirebaseFirestore db2 = FirebaseFirestore.getInstance();
+                                db2.collection("Users").document("type").collection("Customers").document(user.get("userid").toString())
+                                        .set(user)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if(task.isSuccessful()){
+                                                    Toast.makeText(SignupActivity.this, "تم التسجيل بنجاح", Toast.LENGTH_SHORT).show();
+                                                    startActivity(new Intent(SignupActivity.this, MainActivity.class));
+                                                }
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(SignupActivity.this, "لقد حدث خطأ...حاول مرة اخرى", Toast.LENGTH_SHORT).show();
+
+                                            }
+                                        });
+
+                            }else{
                                 FirebaseStorage storage =  FirebaseStorage.getInstance();;
                                 final StorageReference ImageName =  storage.getReference().child("image"+ImageData.getLastPathSegment());
                                 ImageName.putFile(ImageData).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -279,10 +470,10 @@ public class SignupActivity extends AppCompatActivity implements MultiSelectionS
                                                 user.put("email", email);
                                                 user.put("addressd",address );
                                                 user.put("phone", userphone);
-                                                user.put("job",multiSelectionListSpinner.getSelectedItemsAsString() );
+                                                user.put("job",jobListString );
                                                 user.put("password",password );
                                                 user.put("location", "0.0,0.0");
-                                                user.put("type","موظف" );
+                                                user.put("type","زبون" );
                                                 user.put("rate", "5");
                                                 user.put("token", getSharedPreferences("Info",MODE_PRIVATE).getString("token",""));
                                                 user.put("image",uri.toString());
@@ -290,15 +481,15 @@ public class SignupActivity extends AppCompatActivity implements MultiSelectionS
                                                 user.put("comission", "0.0");
 
                                                 SharedPreferences.Editor editor = getSharedPreferences("Info",MODE_PRIVATE).edit();
-                                                editor.putString("userid",timeMilli+username);
+                                                editor.putString("userid",timeMilli+username );
                                                 editor.putString("name", username);
                                                 editor.putString("email", email);
-                                                editor.putString("addressd",address);
+                                                editor.putString("addressd",address );
                                                 editor.putString("phone", userphone);
-                                                editor.putString("job",job);
-                                                editor.putString("password",password);
+                                                editor.putString("job",jobListString );
+                                                editor.putString("password",password );
                                                 editor.putString("location", "0.0,0.0");
-                                                editor.putString("type","موظف");
+                                                editor.putString("type","زبون" );
                                                 editor.putString("rate", "5");
                                                 editor.putString("token", getSharedPreferences("Info",MODE_PRIVATE).getString("token",""));
                                                 editor.putString("image",uri.toString());
@@ -307,13 +498,12 @@ public class SignupActivity extends AppCompatActivity implements MultiSelectionS
                                                 editor.apply();
 
                                                 FirebaseFirestore db = FirebaseFirestore.getInstance();
-                                                db.collection("Users").document("type").collection("Employees").document(user.get("userid").toString())
+                                                db.collection("Users").document("type").collection("Customers").document(user.get("userid").toString())
                                                         .set(user)
                                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                             @Override
                                                             public void onComplete(@NonNull Task<Void> task) {
                                                                 if(task.isSuccessful()){
-                                                                    peasLoadingView.stop(); //stop animation
                                                                     Toast.makeText(SignupActivity.this, "تم التسجيل بنجاح", Toast.LENGTH_SHORT).show();
                                                                     startActivity(new Intent(SignupActivity.this, MainActivity.class));
                                                                 }
@@ -323,86 +513,15 @@ public class SignupActivity extends AppCompatActivity implements MultiSelectionS
                                                             @Override
                                                             public void onFailure(@NonNull Exception e) {
                                                                 Toast.makeText(SignupActivity.this, "لقد حدث خطأ...حاول مرة اخرى", Toast.LENGTH_SHORT).show();
-                                                                peasLoadingView.stop(); //stop animation
 
                                                             }
                                                         });
                                             }
                                         });
-
                                     }
                                 });
-
                             }
 
-                        }else if(type.equals("طالب خدمة")){
-
-                            FirebaseStorage storage =  FirebaseStorage.getInstance();;
-                            final StorageReference ImageName =  storage.getReference().child("image"+ImageData.getLastPathSegment());
-                            ImageName.putFile(ImageData).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                @Override
-                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                    Toast.makeText(SignupActivity.this, "تم تحميل الصوة", Toast.LENGTH_SHORT).show();
-                                    ImageName.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                        @Override
-                                        public void onSuccess(Uri uri) {
-
-                                            Map<String, Object> user = new HashMap<>();
-                                            user.put("userid",timeMilli+username );
-                                            user.put("name", username);
-                                            user.put("email", email);
-                                            user.put("addressd",address );
-                                            user.put("phone", userphone);
-                                            user.put("job",job );
-                                            user.put("password",password );
-                                            user.put("location", "0.0,0.0");
-                                            user.put("type","زبون" );
-                                            user.put("rate", "5");
-                                            user.put("token", getSharedPreferences("Info",MODE_PRIVATE).getString("token",""));
-                                            user.put("image",uri.toString());
-                                            user.put("aid", android_id);
-                                            user.put("comission", "0.0");
-
-                                            SharedPreferences.Editor editor = getSharedPreferences("Info",MODE_PRIVATE).edit();
-                                            editor.putString("userid",timeMilli+username );
-                                            editor.putString("name", username);
-                                            editor.putString("email", email);
-                                            editor.putString("addressd",address );
-                                            editor.putString("phone", userphone);
-                                            editor.putString("job",job );
-                                            editor.putString("password",password );
-                                            editor.putString("location", "0.0,0.0");
-                                            editor.putString("type","زبون" );
-                                            editor.putString("rate", "5");
-                                            editor.putString("token", getSharedPreferences("Info",MODE_PRIVATE).getString("token",""));
-                                            editor.putString("image",uri.toString());
-                                            editor.putString("aid", android_id);
-                                            editor.putString("comission", "0.0");
-                                            editor.apply();
-
-                                            FirebaseFirestore db = FirebaseFirestore.getInstance();
-                                            db.collection("Users").document("type").collection("Customers").document(user.get("userid").toString())
-                                                    .set(user)
-                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                        @Override
-                                                        public void onComplete(@NonNull Task<Void> task) {
-                                                            if(task.isSuccessful()){
-                                                                Toast.makeText(SignupActivity.this, "تم التسجيل بنجاح", Toast.LENGTH_SHORT).show();
-                                                                startActivity(new Intent(SignupActivity.this, MainActivity.class));
-                                                            }
-                                                        }
-                                                    })
-                                                    .addOnFailureListener(new OnFailureListener() {
-                                                        @Override
-                                                        public void onFailure(@NonNull Exception e) {
-                                                            Toast.makeText(SignupActivity.this, "لقد حدث خطأ...حاول مرة اخرى", Toast.LENGTH_SHORT).show();
-
-                                                        }
-                                                    });
-                                        }
-                                    });
-                                }
-                            });
                         }
                     }
                 }
@@ -436,14 +555,14 @@ public class SignupActivity extends AppCompatActivity implements MultiSelectionS
             case R.id.spinner_string_list:
 //                Toast.makeText(this, "List : " + strings.toString(), Toast.LENGTH_LONG).show();
 //                Toast.makeText(SignupActivity.this, jobListString, Toast.LENGTH_SHORT).show();
-                jobListString = strings.toString();
-                if(jobListString.toString().contains(",--اختر--")){
-                    jobListString.replace(",--اختر--","");
-                }else if(jobListString.toString().contains("--اختر--,")){
-                    jobListString.replaceAll("--اختر--,","");
-
+                for(int i = 0; i<strings.size() ; i++){
+                    if(strings.get(i).toString().equals("--اختر--")){
+                        strings.remove(strings.get(i));
+                    }
+//                    jobListString +=strings.get(i).toString()+",";
                 }
-                 Toast.makeText(SignupActivity.this, jobListString, Toast.LENGTH_SHORT).show();
+                jobListString = strings.toString().substring(strings.toString().indexOf("[")+1, strings.toString().length()-1);
+//                 Toast.makeText(SignupActivity.this, jobListString, Toast.LENGTH_SHORT).show();
                 break;
         }
     }

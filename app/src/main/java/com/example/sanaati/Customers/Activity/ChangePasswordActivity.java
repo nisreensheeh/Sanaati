@@ -25,6 +25,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
     EditText NewPass, ConfirmPass;
     Button changeBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

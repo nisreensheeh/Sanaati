@@ -117,9 +117,13 @@ public class ProfileFragment extends Fragment{
         }
         phone_txt.setText(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("phone",""));
 
-
-        Uri Imagedata= Uri.parse(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("image",""));
-        Picasso.get().load(Imagedata).into(profImg);
+        if(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("image","").equals("")){
+            Uri myUri = Uri.parse("member.pic");
+            Picasso.get().load(myUri).placeholder(R.drawable.initimage).into(profImg);
+        }else{
+            Uri Imagedata= Uri.parse(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("image",""));
+            Picasso.get().load(Imagedata).into(profImg);
+        }
 
         profImg.setEnabled(false);
         profImg.setOnClickListener(new View.OnClickListener() {
@@ -177,7 +181,7 @@ public class ProfileFragment extends Fragment{
                     ImageName.putFile(ImageData).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Toast.makeText(getActivity(), "تم تحميل الصوة", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getActivity(), "تم تحميل الصوة", Toast.LENGTH_SHORT).show();
                             ImageName.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
@@ -189,7 +193,6 @@ public class ProfileFragment extends Fragment{
                                     user.put("phone", phone_ed.getText().toString());
                                     user.put("job",job_ed.getText().toString());
                                     user.put("image",uri.toString());
-//                user.put("password",password );
                                     FirebaseFirestore db = FirebaseFirestore.getInstance();
                                     db.collection("Users").document("type").collection("Employees").document(getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("userid",""))
                                             .update(user)
@@ -205,7 +208,6 @@ public class ProfileFragment extends Fragment{
                                                         editor.putString("addressd",address_ed.getText().toString() );
                                                         editor.putString("phone", phone_ed.getText().toString());
                                                         editor.putString("job",job_ed.getText().toString());
-//                editor.putString("password",password );
                                                         editor.putString("image",uri.toString());
                                                         editor.apply();
                                                         profImg.setEnabled(false);
@@ -255,7 +257,7 @@ public class ProfileFragment extends Fragment{
                     ImageName.putFile(ImageData).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Toast.makeText(getActivity(), "تم تحميل الصوة", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getActivity(), "تم تحميل الصوة", Toast.LENGTH_SHORT).show();
                             ImageName.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
