@@ -64,6 +64,7 @@ public class SignupActivity extends AppCompatActivity implements MultiSelectionS
     Uri ImageData;
     ArrayList<String> jobs;
     MultiSelectionSpinner multiSelectionListSpinner;
+    int jobNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -207,6 +208,10 @@ public class SignupActivity extends AppCompatActivity implements MultiSelectionS
 
 //                pb.dismiss();
                 }else{
+                    if(jobNum>4){
+                        Toast.makeText(SignupActivity.this, "يمكنك اختيار 4 وظائف كحد اعلى", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
                     db.collection("Users").document("type").collection("Customers")
                             .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -553,16 +558,13 @@ public class SignupActivity extends AppCompatActivity implements MultiSelectionS
     public void selectedStrings(List<String> strings, MultiSelectionSpinner spinner) {
         switch (spinner.getId()) {
             case R.id.spinner_string_list:
-//                Toast.makeText(this, "List : " + strings.toString(), Toast.LENGTH_LONG).show();
-//                Toast.makeText(SignupActivity.this, jobListString, Toast.LENGTH_SHORT).show();
                 for(int i = 0; i<strings.size() ; i++){
-                    if(strings.get(i).toString().equals("--اختر--")){
+                    if(strings.get(i).equals("--اختر--")){
                         strings.remove(strings.get(i));
                     }
-//                    jobListString +=strings.get(i).toString()+",";
                 }
+                jobNum = strings.size();
                 jobListString = strings.toString().substring(strings.toString().indexOf("[")+1, strings.toString().length()-1);
-//                 Toast.makeText(SignupActivity.this, jobListString, Toast.LENGTH_SHORT).show();
                 break;
         }
     }
