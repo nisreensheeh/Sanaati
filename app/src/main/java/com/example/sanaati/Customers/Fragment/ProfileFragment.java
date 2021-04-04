@@ -287,7 +287,8 @@ public class ProfileFragment extends Fragment  implements MultiSelectionSpinner.
                                                 editor.putString("job",getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("job",""));
                                             }else{
                                                 editor.putString("job",jobListString);
-                                            }                                            editor.putString("image",getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("image",""));
+                                            }
+                                            editor.putString("image",getActivity().getSharedPreferences("Info", MODE_PRIVATE).getString("image",""));
                                             editor.apply();
                                             profImg.setEnabled(false);
                                             name_txt.setVisibility(View.VISIBLE);

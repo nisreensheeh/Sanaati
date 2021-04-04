@@ -40,7 +40,12 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorPrimary" />
-
+        <service
+            android:name=".Customers.Class.MyFirebaseInstanceIdService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
         <service
             android:name=".UsersAuth.Class.MyFirebaseMessagingService"
             android:exported="false">

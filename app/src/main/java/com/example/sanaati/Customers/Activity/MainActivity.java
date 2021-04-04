@@ -150,14 +150,11 @@ public class MainActivity extends AppCompatActivity {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
 
             if((getSharedPreferences("Info",MODE_PRIVATE).getString("type","").equals("موظف"))){
-            db.collection("Users").document("type").collection("Employees").document(getSharedPreferences("Info",MODE_PRIVATE).getString("userid",""))
-                    .update("token", getSharedPreferences("Info",MODE_PRIVATE).getString("token", "-"));
-            }
-            else {
-                {
-                    db.collection("Users").document("type").collection("Customers").document(getSharedPreferences("Info",MODE_PRIVATE).getString("userid",""))
-                            .update("token", getSharedPreferences("Info",MODE_PRIVATE).getString("token", "-"));
-                }
+                db.collection("Users").document("type").collection("Employees").document(getSharedPreferences("Info",MODE_PRIVATE).getString("userid",""))
+                        .update("token", getSharedPreferences("Info",MODE_PRIVATE).getString("token", "-"));
+            }else {
+                db.collection("Users").document("type").collection("Customers").document(getSharedPreferences("Info",MODE_PRIVATE).getString("userid",""))
+                        .update("token", getSharedPreferences("Info",MODE_PRIVATE).getString("token", "-"));
             }
         }
     }

@@ -41,7 +41,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         SharedPreferences.Editor editor = getSharedPreferences("Info",MODE_PRIVATE).edit();
         editor.putString("token", token);
         editor.putString("new_token", "yes");
-        editor.apply(); }
+        editor.apply();
+    }
 
     public void showNotification(String heading, String description){
 

@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.sanaati.R;
 import com.example.sanaati.UsersAuth.Class.Users;
 import com.google.android.gms.maps.MapFragment;
@@ -30,6 +35,21 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Reader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -125,8 +145,8 @@ public class EmpProfileActivity extends AppCompatActivity {
                     public void onClick(View v) {
 
                         Map<String, Object> usercomplain = new HashMap<>();
-                        usercomplain.put("clientId", getSharedPreferences("Info", Context.MODE_PRIVATE).getString("UserId",""));
-                        usercomplain.put("clientName", getSharedPreferences("Info", Context.MODE_PRIVATE).getString("Name",""));
+                        usercomplain.put("clientId", getSharedPreferences("Info", Context.MODE_PRIVATE).getString("userid",""));
+                        usercomplain.put("clientName", getSharedPreferences("Info", Context.MODE_PRIVATE).getString("name",""));
                         usercomplain.put("empId", mEmpdata.userid);
                         usercomplain.put("empName", mEmpdata.name);
                         usercomplain.put("complainText",comlain_et.getText().toString());
@@ -180,12 +200,28 @@ public class EmpProfileActivity extends AppCompatActivity {
                 yes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Date currentDateTime = Calendar.getInstance().getTime();
+
+                        Date newDate = new Date();
+                        SimpleDateFormat sdfServer = new SimpleDateFormat("dd/MM/yyyy");
+
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm:ss a");
+                        String formattedDate= dateFormat.format(newDate);
+
+//                        Date currentDateTime = Calendar.getInstance().getTime();
                         Map<String, Object> talabat = new HashMap<>();
-                        talabat.put("clientId", getSharedPreferences("Info", Context.MODE_PRIVATE).getString("UserId",""));
+                        talabat.put("clientId", getSharedPreferences("Info", Context.MODE_PRIVATE).getString("userid",""));
+                        talabat.put("clientName", getSharedPreferences("Info", Context.MODE_PRIVATE).getString("name",""));
                         talabat.put("empId", mEmpdata.userid);
-                        talabat.put("DateTime",currentDateTime);
+                        talabat.put("empName", mEmpdata.name);
+                        talabat.put("requestDate",sdfServer.format(newDate));
+                        talabat.put("requestTime",formattedDate);
+                        talabat.put("empArrivedDateTime","");
+                        talabat.put("empLeavedDateTime","");
+                        talabat.put("clientLocation",getSharedPreferences("Info", Context.MODE_PRIVATE).getString("location",""));
                         talabat.put("empLocation",mEmpdata.location);
+                        talabat.put("totalAmount","");
+                        talabat.put("companyComission","");
+                        talabat.put("customerEmpRate","");
 
                         FirebaseFirestore db = FirebaseFirestore.getInstance();
                         CollectionReference talabRef = db.collection("Talabat");
@@ -193,21 +229,44 @@ public class EmpProfileActivity extends AppCompatActivity {
                                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                     @Override
                                     public void onSuccess(DocumentReference documentReference) {
+
+//                                        AsyncT asyncT = new AsyncT();
+//                                        asyncT.execute();
+                                        RequestQueue mRequestQue = Volley.newRequestQueue(EmpProfileActivity.this);
+                                        JSONObject json = new JSONObject();
+                                        try {
+                                            json.put("to", mEmpdata.token);
+                                            JSONObject notificationObj = new JSONObject();
+                                            notificationObj.put("title", "Sanaati Notification");
+                                            notificationObj.put("body", "يوجد لديك طلب خدمة");
+                                            //replace notification with data when went send data
+                                            json.put("notification", notificationObj);
+                                            json.put("data", notificationObj);
+
+                                            String URL = "https://fcm.googleapis.com/fcm/send";
+                                            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL,
+                                                    json,null, null
+                                            ) {
+                                                @Override
+                                                public Map<String, String> getHeaders() {
+                                                    Map<String, String> header = new HashMap<>();
+                                                    header.put("content-type", "application/json");
+                                                    header.put("Sender", "id=1038536184094");
+                                                    header.put("authorization", "key=AAAA8c2UkR4:APA91bER9hhaiH5l4XH2FOzwiLo_fL43ZKhDzwlMtOAURiuaFpOLnbAJ_amgRdauQvOQuxZyP2Rb5v4ijdOjGH3W0V4ZVrAyn3VKrM8piJuJcnWluDE8hGicjqjUHhtgKQ6TmKNkW9Tv");
+                                                    return header;
+                                                }
+                                            };
+                                            mRequestQue.add(request);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+
+
+
+
+
                                         Toast.makeText(EmpProfileActivity.this, "الحرفي في طريقه اليك", Toast.LENGTH_SHORT).show();
                                         dialog.dismiss();
-
-                                        Bundle bundle = new Bundle();
-                                        bundle.putString("openMapFragment","yes");
-                                        bundle.putString("empLocation",mEmpdata.location);
-                                        bundle.putString("empName",mEmpdata.name);
-                                        bundle.putString("empJob",mEmpdata.job);
-                                        bundle.putString("clientLocation",getSharedPreferences("Info", Context.MODE_PRIVATE).getString("UserLocation",""));
-                                        MapFragment fragInfo = new MapFragment();
-                                        fragInfo.setArguments(bundle);
-//                                        transaction.replace(R.id.fragment_single, fragInfo);
-//                                        transaction.commit();
-                                        startActivity(new Intent(EmpProfileActivity.this, MainActivity.class));
-                                        finish();
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
@@ -229,5 +288,78 @@ public class EmpProfileActivity extends AppCompatActivity {
             }
         });
 
+    }
+    class AsyncT extends AsyncTask<Void,Void,Void> {
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            try {
+                URL url = new URL(" https://fcm.googleapis.com/fcm/send"); //Enter URL here
+                HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setRequestMethod("POST"); // here you are telling that it is a POST request, which can be changed into "PUT", "GET", "DELETE" etc.
+                httpURLConnection.setRequestProperty("Content-Type", "application/json"); // here you are setting the `Content-Type` for the data you are sending which is `application/json`
+                httpURLConnection.setRequestProperty("Accept", "application/json");
+                httpURLConnection.setRequestProperty("Sender", "id=1038536184094");
+                httpURLConnection.setRequestProperty("authorization", "key=AAAA8c2UkR4:APA91bER9hhaiH5l4XH2FOzwiLo_fL43ZKhDzwlMtOAURiuaFpOLnbAJ_amgRdauQvOQuxZyP2Rb5v4ijdOjGH3W0V4ZVrAyn3VKrM8piJuJcnWluDE8hGicjqjUHhtgKQ6TmKNkW9Tv");
+//
+                httpURLConnection.connect();
+
+//                                            String jsonInputString =
+//                                                    "{\"to\": \""+mEmpdata.token+"\"," +
+//                                                            " \"notification\": {\"title\":\"title\",\"body\":\"body\"}," +
+//                                                            "\"data\": {\"title\":\"title\",\"body\":\"body\"}}";
+                JSONObject json = new JSONObject();
+                try {
+                    json.put("to", mEmpdata.token);
+                    JSONObject notificationObj = new JSONObject();
+                    notificationObj.put("title", "Sanaati Notification");
+                    notificationObj.put("body", "يوجد لديك طلب خدمة");
+                    //replace notification with data when went send data
+                    json.put("notification", notificationObj);
+                    json.put("data", notificationObj);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                OutputStreamWriter wr = new OutputStreamWriter(httpURLConnection.getOutputStream());
+                wr.write(json.toString());
+                wr.flush();
+//                                            wr.close();
+
+                InputStream response = httpURLConnection.getInputStream();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(response));
+
+//                                            BufferedInputStream reader = new BufferedInputStream(inputStream);
+
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+                try {
+                    while ((line = reader.readLine()) != null) {
+                        sb.append(line + "\n");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+
+                }
+//                DataOutputStream wr = new DataOutputStream(httpURLConnection.getOutputStream());
+//                wr.writeBytes(jsonObject.toString());
+//                wr.flush();
+//                wr.close()
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+            return null;
+        }
+
+
+        public void execute() {
+        }
     }
 }
