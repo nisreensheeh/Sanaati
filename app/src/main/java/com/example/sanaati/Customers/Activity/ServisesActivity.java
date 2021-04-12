@@ -121,13 +121,20 @@ public class ServisesActivity extends AppCompatActivity {
     }
 
     private void sort(Users ui) {
-        int pos = -1;
-        for(int i=0; i<empByJob.size();i++)
-            if(empByJob.get(i).job.equals(ui.job))
-                pos=i;
+//        int pos = -1;
+        ArrayList<Integer> pos =new ArrayList<>();
+        pos.clear();
 
-        if(pos!=-1){
-            empByJob.get(pos).Add(ui);}
+        String[] temp = ui.job.split(", ");
+        for(int j=0; j<temp.length;j++){
+            for(int i=0; i<empByJob.size();i++){
+                if(empByJob.get(i).job.equals(temp[j]))
+                    pos.add(i);
+
+            }
+        }
+        for(int d=0; d<pos.size();d++){
+            empByJob.get(pos.get(d)).Add(ui);}
     }
 
     class NewAdapter extends BaseExpandableListAdapter {
@@ -205,7 +212,9 @@ public class ServisesActivity extends AppCompatActivity {
                         startActivity(new Intent(ServisesActivity.this,EmpProfileActivity.class).putExtra("Empprofile",empByJob.get(groupPosition).info.get(0)));
                     }
                 });
-            }catch (Exception e){}
+            }catch (Exception e){
+                mCardView1.setVisibility(View.GONE);
+            }
 
             try{
                 Uri Imagedata= Uri.parse(empByJob.get(groupPosition).info.get(1).image);
@@ -219,7 +228,9 @@ public class ServisesActivity extends AppCompatActivity {
                         startActivity(new Intent(ServisesActivity.this,EmpProfileActivity.class).putExtra("Empprofile",empByJob.get(groupPosition).info.get(1)));
                     }
                 });
-            }catch (Exception e){}
+            }catch (Exception e){
+                mCardView2.setVisibility(View.GONE);
+            }
 
 
             try{
@@ -234,7 +245,9 @@ public class ServisesActivity extends AppCompatActivity {
                         startActivity(new Intent(ServisesActivity.this,EmpProfileActivity.class).putExtra("Empprofile",empByJob.get(groupPosition).info.get(2)));
                     }
                 });
-            }catch (Exception e){}
+            }catch (Exception e){
+                mCardView3.setVisibility(View.GONE);
+            }
 
 
             try{
@@ -249,7 +262,9 @@ public class ServisesActivity extends AppCompatActivity {
                         startActivity(new Intent(ServisesActivity.this,EmpProfileActivity.class).putExtra("Empprofile",empByJob.get(groupPosition).info.get(3)));
                     }
                 });
-            }catch (Exception e){}
+            }catch (Exception e){
+                mCardView4.setVisibility(View.GONE);
+            }
 
             try{
                 Uri Imagedata= Uri.parse(empByJob.get(groupPosition).info.get(4).image);
@@ -263,7 +278,9 @@ public class ServisesActivity extends AppCompatActivity {
                         startActivity(new Intent(ServisesActivity.this,EmpProfileActivity.class).putExtra("Empprofile",empByJob.get(groupPosition).info.get(4)));
                     }
                 });
-            }catch (Exception e){}
+            }catch (Exception e){
+                mCardView5.setVisibility(View.GONE);
+            }
 
             return convertView;
         }

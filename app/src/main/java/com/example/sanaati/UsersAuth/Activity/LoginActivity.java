@@ -101,6 +101,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "ادخل اسمك", Toast.LENGTH_SHORT).show();
 //                    pb.dismiss();
                     peasLoadingView.stop(); //stop animation
+                    peasLoadingView.setVisibility(View.GONE);
                     return;
                 }
 
@@ -108,6 +109,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "ادخل كلمة السر", Toast.LENGTH_SHORT).show();
 //                    pb.dismiss();
                     peasLoadingView.stop(); //stop animation
+                    peasLoadingView.setVisibility(View.GONE);
                     return;
                 }
 
@@ -123,6 +125,7 @@ public class LoginActivity extends AppCompatActivity {
                         List<DocumentSnapshot> gr = queryDocumentSnapshots.getDocuments();
                         if(gr==null){
                             peasLoadingView.stop(); //stop animation
+                            peasLoadingView.setVisibility(View.GONE);
                         }else{
                             if (gr.size() != 0) {
                                 for (int i = 0; i < gr.size(); i++) {
@@ -159,6 +162,7 @@ public class LoginActivity extends AppCompatActivity {
                                             if(users.get(0).name.equals(username) && users.get(0).password.equals(password)) {
 //                                                pb.dismiss();
                                                 peasLoadingView.stop();
+                                                peasLoadingView.setVisibility(View.GONE);
                                                 SharedPreferences.Editor editor =
                                                         getSharedPreferences("Info", Context.MODE_PRIVATE).edit();
                                                 editor.putString("name",username);
@@ -200,11 +204,14 @@ public class LoginActivity extends AppCompatActivity {
                                             }else{
 //                                                pb.dismiss();
                                                 peasLoadingView.stop(); //stop animation
+                                                peasLoadingView.setVisibility(View.GONE);
                                                 Toast.makeText(LoginActivity.this, "المستخدم غير موجود", Toast.LENGTH_SHORT).show();
                                             }
                                         }else{
 //                                            pb.dismiss();
                                             peasLoadingView.stop(); //stop animation
+                                            peasLoadingView.setVisibility(View.GONE);
+
                                             Toast.makeText(LoginActivity.this, "المستخدم غير موجود", Toast.LENGTH_SHORT).show();
                                         }
 
