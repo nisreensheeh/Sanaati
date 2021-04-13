@@ -1,6 +1,7 @@
 package com.example.sanaati.Customers.Activity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,14 +11,20 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +32,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.sanaati.Customers.Fragment.ProfileFragment;
 import com.example.sanaati.R;
 import com.example.sanaati.UsersAuth.Class.Users;
 import com.google.android.gms.maps.MapFragment;
@@ -50,6 +58,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -60,10 +69,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class EmpProfileActivity extends AppCompatActivity {
 
     Users mEmpdata;
-    TextView name, job, address;
+    TextView name, job, address, email_txt, phone_txt;
     ImageView whatsapp_image,call_image, complain_image;
     CircleImageView profimg;
     Button request_btn;
+    GridView gridViewCustom;
+    ArrayList<String> jobs;
+    RatingBar rBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,20 +83,41 @@ public class EmpProfileActivity extends AppCompatActivity {
 
         mEmpdata = (Users)getIntent().getSerializableExtra("Empprofile");
 
-        name = findViewById(R.id.name);
-        job = findViewById(R.id.job);
-        address = findViewById(R.id.address);
+        name = findViewById(R.id.name_txt);
+        address = findViewById(R.id.address_txt);
         profimg = findViewById(R.id.img);
+        email_txt = findViewById(R.id.email_txt);
+        phone_txt = findViewById(R.id.phone_txt);
+        gridViewCustom = findViewById(R.id.gridViewCustom);
+
+        jobs = new ArrayList<>();
+        String[] temp =mEmpdata.job.split(",");
+        for(int j=0; j<temp.length;j++){
+            jobs.add(temp[j]);
+        }
+        gridViewCustom.setAdapter(new CustomGridViewAdapter());
+
         Uri Imagedata= Uri.parse(mEmpdata.image);
         Picasso.get().load(Imagedata).into(profimg);
         name.setText(mEmpdata.name);
-        job.setText(mEmpdata.job);
         address.setText(mEmpdata.addressd);
+        if(mEmpdata.email.equals("")){
+            email_txt.setText("\"الموظف لم يزودنا بالايميل الخاص به\"");
+            email_txt.setTextColor(getResources().getColor(R.color.colorPrimary));
+        }else {
+            email_txt.setText(mEmpdata.email);
+        }
+
+        phone_txt.setText(mEmpdata.phone);
 
         whatsapp_image= findViewById(R.id.whatsapp_image);
         call_image= findViewById(R.id.call_image);
         complain_image= findViewById(R.id.complain_image);
         request_btn= findViewById(R.id.request_btn);
+
+        rBar = findViewById(R.id.ratingBar);
+        rBar.setRating(Float.parseFloat(mEmpdata.rate));
+
 
         whatsapp_image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -197,6 +230,7 @@ public class EmpProfileActivity extends AppCompatActivity {
                 dialog.getWindow().setAttributes(lp);
                 final Button yes=dialog.findViewById(R.id.btn2);
                 final Button no=dialog.findViewById(R.id.btn1);
+                final CircleImageView im=dialog.findViewById(R.id.im);
                 yes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -261,10 +295,6 @@ public class EmpProfileActivity extends AppCompatActivity {
                                             e.printStackTrace();
                                         }
 
-
-
-
-
                                         Toast.makeText(EmpProfileActivity.this, "الحرفي في طريقه اليك", Toast.LENGTH_SHORT).show();
                                         dialog.dismiss();
                                     }
@@ -284,11 +314,54 @@ public class EmpProfileActivity extends AppCompatActivity {
                         dialog.dismiss();
                     }
                 });
+                im.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
 
             }
         });
 
     }
+
+    public class CustomGridViewAdapter extends BaseAdapter {
+
+        @Override
+        public int getCount() {
+            return jobs.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return jobs.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return 0;
+        }
+
+        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+
+            if (convertView == null) {
+                LayoutInflater inflater = EmpProfileActivity.this.getLayoutInflater();
+                convertView = inflater.inflate(R.layout.table_lay, parent, false);
+            }
+
+            TextView t2;
+            t2 = convertView.findViewById(R.id.txt2);
+
+            t2.setText(jobs.get(position));
+            t2.setBackgroundResource(R.drawable.shape2);
+
+            return convertView; }
+    }
+
+
     class AsyncT extends AsyncTask<Void,Void,Void> {
 
         @Override
@@ -303,13 +376,9 @@ public class EmpProfileActivity extends AppCompatActivity {
                 httpURLConnection.setRequestProperty("Accept", "application/json");
                 httpURLConnection.setRequestProperty("Sender", "id=1038536184094");
                 httpURLConnection.setRequestProperty("authorization", "key=AAAA8c2UkR4:APA91bER9hhaiH5l4XH2FOzwiLo_fL43ZKhDzwlMtOAURiuaFpOLnbAJ_amgRdauQvOQuxZyP2Rb5v4ijdOjGH3W0V4ZVrAyn3VKrM8piJuJcnWluDE8hGicjqjUHhtgKQ6TmKNkW9Tv");
-//
+
                 httpURLConnection.connect();
 
-//                                            String jsonInputString =
-//                                                    "{\"to\": \""+mEmpdata.token+"\"," +
-//                                                            " \"notification\": {\"title\":\"title\",\"body\":\"body\"}," +
-//                                                            "\"data\": {\"title\":\"title\",\"body\":\"body\"}}";
                 JSONObject json = new JSONObject();
                 try {
                     json.put("to", mEmpdata.token);
