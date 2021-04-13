@@ -15,7 +15,10 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.Sanaati">
-        <activity android:name=".Customers.Activity.ChangePasswordActivity"></activity>
+        <activity android:name=".Employees.Activity.EmpMainActivity"></activity>
+        <activity android:name=".Employees.Activity.TalabatActivity" />
+        <activity android:name=".Other.ContactMapActivity" />
+        <activity android:name=".Customers.Activity.ChangePasswordActivity" />
         <activity android:name=".Customers.Activity.EmpProfileActivity" />
         <activity android:name=".Customers.Activity.ServisesActivity" />
         <activity android:name=".Customers.Activity.MapsActivity" />
@@ -40,10 +43,10 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/colorPrimary" />
-        <service
-            android:name=".Customers.Class.MyFirebaseInstanceIdService">
+
+        <service android:name=".Customers.Class.MyFirebaseInstanceIdService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
         <service

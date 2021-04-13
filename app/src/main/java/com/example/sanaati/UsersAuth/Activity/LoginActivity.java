@@ -26,6 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.example.sanaati.Customers.Activity.MainActivity;
+import com.example.sanaati.Employees.Activity.EmpMainActivity;
 import com.example.sanaati.R;
 import com.example.sanaati.UsersAuth.Class.Users;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -197,10 +198,16 @@ public class LoginActivity extends AppCompatActivity {
 //
 //                                                            }
 //                                                        });
+                                                if(getSharedPreferences("Info",Context.MODE_PRIVATE).getString("type","").equals("زبون")){
+                                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                                    startActivity(intent);
+                                                    finish();
+                                                }else{
+                                                    Intent intent = new Intent(LoginActivity.this, EmpMainActivity.class);
+                                                    startActivity(intent);
+                                                    finish();
+                                                }
 
-                                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                                startActivity(intent);
-                                                finish();
                                             }else{
 //                                                pb.dismiss();
                                                 peasLoadingView.stop(); //stop animation

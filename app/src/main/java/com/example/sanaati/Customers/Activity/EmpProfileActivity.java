@@ -241,7 +241,6 @@ public class EmpProfileActivity extends AppCompatActivity {
                         SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm:ss a");
                         String formattedDate= dateFormat.format(newDate);
 
-//                        Date currentDateTime = Calendar.getInstance().getTime();
                         Map<String, Object> talabat = new HashMap<>();
                         talabat.put("clientId", getSharedPreferences("Info", Context.MODE_PRIVATE).getString("userid",""));
                         talabat.put("clientName", getSharedPreferences("Info", Context.MODE_PRIVATE).getString("name",""));
@@ -256,6 +255,7 @@ public class EmpProfileActivity extends AppCompatActivity {
                         talabat.put("totalAmount","");
                         talabat.put("companyComission","");
                         talabat.put("customerEmpRate","");
+                        talabat.put("status","قيد الطلب");
 
                         FirebaseFirestore db = FirebaseFirestore.getInstance();
                         CollectionReference talabRef = db.collection("Talabat");
@@ -296,6 +296,9 @@ public class EmpProfileActivity extends AppCompatActivity {
                                         }
 
                                         Toast.makeText(EmpProfileActivity.this, "الحرفي في طريقه اليك", Toast.LENGTH_SHORT).show();
+                                        //هون لازم اعمل delayلوقت معين انه حتى يرد الموظف ويوافق عالطلب وقتها بنقله الزبون عالخريطة اما اذا رفض او ما رد او ما وافق عالطلب احكي للزبون انه الموظف مشغول شوف غيره او اطلب به بعد شوي جرب
+                                        //الموافقة بعرفها من حالة الطلب انه تصير قيذ التنفي\ بدل قيد الطلب
+                                        //كمان لازم نشيك انه هاد الموظف ما عنده خدمة شغال فيها حاليا وعشان ىنضمن انه هيك الموظف ما بطلبه اكثر من مرة او ما يطلب موظفين بنفس المهن بنفس الوقت
                                         dialog.dismiss();
                                     }
                                 })
