@@ -69,9 +69,10 @@ public class TalabatActivity extends AppCompatActivity {
         db.collection("Talabat").whereEqualTo("empId", getSharedPreferences("Info",Context.MODE_PRIVATE).getString("userid","")).whereEqualTo("status","قيد الطلب")
                 .get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
 
+
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-
+                Toast.makeText(TalabatActivity.this, "h", Toast.LENGTH_SHORT).show();
                 List<DocumentSnapshot> gr = queryDocumentSnapshots.getDocuments();
                 if(gr==null){
                     peasLoadingView.stop(); //stop animation
@@ -81,7 +82,7 @@ public class TalabatActivity extends AppCompatActivity {
                         for (int i = 0; i < gr.size(); i++) {
                             talabat.add(new Talabat(gr.get(i).getString("talabId"),gr.get(i).getString("clientId"), gr.get(i).getString("clientName"),gr.get(i).getString("clientaddress"),
                                     gr.get(i).getString("clientlocation"), gr.get(i).getString("empId"),
-                                    gr.get(i).getString("empName"), gr.get(i).getString("requestDate"), gr.get(i).getString("requestTime"),
+                                    gr.get(i).getString("empName"),gr.get(i).getString("empService"), gr.get(i).getString("requestDate"), gr.get(i).getString("requestTime"),
                                     gr.get(i).getString("empArrivedDateTime"), gr.get(i).getString("empLeavedDateTime"), gr.get(i).getString("clientLocation")
                                     , gr.get(i).getString("empLocation"), gr.get(i).getString("totalAmount"), gr.get(i).getString("companyComission")
                                     , gr.get(i).getString("customerEmpRate"), gr.get(i).getString("status")));

@@ -209,7 +209,7 @@ public class ServisesActivity extends AppCompatActivity {
                 mCardView1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(new Intent(ServisesActivity.this,EmpProfileActivity.class).putExtra("Empprofile",empByJob.get(groupPosition).info.get(0)));
+                        startActivity(new Intent(ServisesActivity.this,EmpProfileActivity.class).putExtra("Empprofile",empByJob.get(groupPosition).info.get(0)).putExtra("EmpRequestedService",empByJob.get(groupPosition).job));
                     }
                 });
             }catch (Exception e){
@@ -225,7 +225,7 @@ public class ServisesActivity extends AppCompatActivity {
                 mCardView2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(new Intent(ServisesActivity.this,EmpProfileActivity.class).putExtra("Empprofile",empByJob.get(groupPosition).info.get(1)));
+                        startActivity(new Intent(ServisesActivity.this,EmpProfileActivity.class).putExtra("Empprofile",empByJob.get(groupPosition).info.get(1)).putExtra("EmpRequestedService",empByJob.get(groupPosition).job));
                     }
                 });
             }catch (Exception e){
@@ -242,7 +242,7 @@ public class ServisesActivity extends AppCompatActivity {
                 mCardView3.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(new Intent(ServisesActivity.this,EmpProfileActivity.class).putExtra("Empprofile",empByJob.get(groupPosition).info.get(2)));
+                        startActivity(new Intent(ServisesActivity.this,EmpProfileActivity.class).putExtra("Empprofile",empByJob.get(groupPosition).info.get(2)).putExtra("EmpRequestedService",empByJob.get(groupPosition).job));
                     }
                 });
             }catch (Exception e){
@@ -259,7 +259,7 @@ public class ServisesActivity extends AppCompatActivity {
                 mCardView4.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(new Intent(ServisesActivity.this,EmpProfileActivity.class).putExtra("Empprofile",empByJob.get(groupPosition).info.get(3)));
+                        startActivity(new Intent(ServisesActivity.this,EmpProfileActivity.class).putExtra("Empprofile",empByJob.get(groupPosition).info.get(3)).putExtra("EmpRequestedService",empByJob.get(groupPosition).job));
                     }
                 });
             }catch (Exception e){
@@ -275,7 +275,7 @@ public class ServisesActivity extends AppCompatActivity {
                 mCardView5.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(new Intent(ServisesActivity.this,EmpProfileActivity.class).putExtra("Empprofile",empByJob.get(groupPosition).info.get(4)));
+                        startActivity(new Intent(ServisesActivity.this,EmpProfileActivity.class).putExtra("Empprofile",empByJob.get(groupPosition).info.get(4)).putExtra("EmpRequestedService",empByJob.get(groupPosition).job));
                     }
                 });
             }catch (Exception e){

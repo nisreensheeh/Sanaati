@@ -69,6 +69,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class EmpProfileActivity extends AppCompatActivity {
 
     Users mEmpdata;
+    String EmpRequestedService;
     TextView name, job, address, email_txt, phone_txt;
     ImageView whatsapp_image,call_image, complain_image;
     CircleImageView profimg;
@@ -82,6 +83,7 @@ public class EmpProfileActivity extends AppCompatActivity {
         setContentView(R.layout.profile);
 
         mEmpdata = (Users)getIntent().getSerializableExtra("Empprofile");
+        EmpRequestedService = getIntent().getStringExtra("EmpRequestedService");
 
         name = findViewById(R.id.name_txt);
         address = findViewById(R.id.address_txt);
@@ -242,13 +244,14 @@ public class EmpProfileActivity extends AppCompatActivity {
                         String formattedDate= dateFormat.format(newDate);
 
                         Map<String, Object> talabat = new HashMap<>();
-                        talabat.put("talabId", newDate.getYear()+newDate.getMonth()+newDate.getHours()+newDate.getMinutes()+newDate.getSeconds());
+                        talabat.put("talabId", newDate.getYear()+newDate.getMonth()+newDate.getHours()+newDate.getMinutes()+newDate.getSeconds()+"");
                         talabat.put("clientId", getSharedPreferences("Info", Context.MODE_PRIVATE).getString("userid",""));
                         talabat.put("clientName", getSharedPreferences("Info", Context.MODE_PRIVATE).getString("name",""));
                         talabat.put("clientaddress", getSharedPreferences("Info", Context.MODE_PRIVATE).getString("addressd",""));
                         talabat.put("clientlocation", getSharedPreferences("Info", Context.MODE_PRIVATE).getString("location",""));
                         talabat.put("empId", mEmpdata.userid);
                         talabat.put("empName", mEmpdata.name);
+                        talabat.put("empService", EmpRequestedService);
                         talabat.put("requestDate",sdfServer.format(newDate));
                         talabat.put("requestTime",formattedDate);
                         talabat.put("empArrivedDateTime","");
